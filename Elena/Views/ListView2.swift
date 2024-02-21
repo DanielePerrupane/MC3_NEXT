@@ -10,6 +10,7 @@ import SwiftUI
 struct ListView2: View {
     
     @EnvironmentObject var listViewModel: ListViewModel
+    
     //    @State var items: [ItemModel] = [
     //
     //        ItemModel(title: "First Title!", isCompleted: false),
@@ -18,10 +19,23 @@ struct ListView2: View {
     //
     //    ]
     
+    /*
+     CRUD FUNCTION
+     Create
+     Read
+     Update
+     Delete
+     */
+    
     var body: some View {
         List{
             ForEach(listViewModel.items){ item in
                 ListRowView(item: item)
+                    .onTapGesture {
+                        withAnimation(.linear){
+                            listViewModel.updateItem(item: item)
+                        }
+                    }
             }
             .onDelete(perform: listViewModel.deleteItem)
             .onMove(perform: listViewModel.moveItem)
