@@ -10,6 +10,7 @@ import SwiftUI
 struct ListView2: View {
     
     @EnvironmentObject var listViewModel: ListViewModel
+    let secondaryAccentColor = Color("SecondAccentColor")
     
     //    @State var items: [ItemModel] = [
     //
@@ -52,8 +53,9 @@ struct ListView2: View {
         
         .navigationTitle("Daily Tasks 📝")
         .navigationBarItems(
-            leading: EditButton(),
-            trailing: NavigationLink("Add", destination: AddView()))
+            leading: EditButton().foregroundStyle(secondaryAccentColor),
+            trailing: NavigationLink("Add", destination: AddView())
+                .foregroundStyle(secondaryAccentColor))
     }
     
     //    func deleteItem(indexSet: IndexSet) {

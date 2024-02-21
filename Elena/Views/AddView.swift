@@ -12,6 +12,8 @@ struct AddView: View {
     @EnvironmentObject var listViewModel: ListViewModel
     @State var textFieldText: String = ""
     
+    let secondaryAccentColor = Color("SecondAccentColor")
+    
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
     
@@ -24,12 +26,13 @@ struct AddView: View {
                     .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.888, opacity: 0.429))
                     .cornerRadius(10.0)
                 Button(action: saveButtonPressed, label: {
+                    //SAVE BUTTON
                     Text("Save".uppercased())
                         .foregroundColor(.white)
                         .font(.headline)
                         .frame(height: 55)
                         .frame(maxWidth: .infinity)
-                        .background(Color.accentColor)
+                        .background(secondaryAccentColor)
                         .cornerRadius(10.0)
                 })
                 
