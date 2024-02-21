@@ -20,6 +20,7 @@
 		E7A2730A2B8604500020F273 /* ListView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A273092B8604500020F273 /* ListView2.swift */; };
 		E7A2730C2B8604A30020F273 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A2730B2B8604A30020F273 /* ListRowView.swift */; };
 		E7A2730E2B8613AF0020F273 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A2730D2B8613AF0020F273 /* ListViewModel.swift */; };
+		E7A273102B8644990020F273 /* NoTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A2730F2B8644990020F273 /* NoTasksView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		E7A273092B8604500020F273 /* ListView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView2.swift; sourceTree = "<group>"; };
 		E7A2730B2B8604A30020F273 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		E7A2730D2B8613AF0020F273 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		E7A2730F2B8644990020F273 /* NoTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTasksView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				E70E478D2B83B81E00D09A6A /* UselessView.swift */,
+				E7A2730F2B8644990020F273 /* NoTasksView.swift */,
 				E7A273092B8604500020F273 /* ListView2.swift */,
 				E7A273052B85F0480020F273 /* AddView.swift */,
 				E70E478F2B83BEFB00D09A6A /* ListView.swift */,
@@ -190,6 +193,7 @@
 			files = (
 				E7A273062B85F0480020F273 /* AddView.swift in Sources */,
 				E70E47842B837CCB00D09A6A /* TaskViewModel.swift in Sources */,
+				E7A273102B8644990020F273 /* NoTasksView.swift in Sources */,
 				E70E478A2B83AE9900D09A6A /* Task.swift in Sources */,
 				E7A2730A2B8604500020F273 /* ListView2.swift in Sources */,
 				E7A273082B8602890020F273 /* ItemModel.swift in Sources */,
