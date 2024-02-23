@@ -17,6 +17,7 @@ struct ElenaApp: App {
             NavigationView{
                 ListView2()
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             .environmentObject(listViewModel)
             
         }

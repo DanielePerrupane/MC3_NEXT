@@ -11,10 +11,13 @@ struct NoTasksView: View {
     
     @State var animate: Bool = false
     let secondaryAccentColor = Color("SecondAccentColor")
+    //let backgroundColor = Color("background")
     
     var body: some View {
         ScrollView {
+            
             VStack(spacing: 10) {
+                
                 Text("There are no tasks!")
                     .font(.title)
                     .fontWeight(.semibold)
@@ -44,6 +47,7 @@ struct NoTasksView: View {
                 .scaleEffect(animate ? 1.1 : 1.0)
                 .offset(y: animate ? 7 : 0)
             }
+            .frame(maxWidth: 400)
             .multilineTextAlignment(.center)
             .padding(40)
             .onAppear(perform: addAnimation)

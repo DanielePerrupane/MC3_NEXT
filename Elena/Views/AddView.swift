@@ -13,34 +13,41 @@ struct AddView: View {
     @State var textFieldText: String = ""
     
     let secondaryAccentColor = Color("SecondAccentColor")
+    let backgroundColor = Color("background")
     
     @State var alertTitle: String = ""
     @State var showAlert: Bool = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                TextField("Type something here...", text: $textFieldText)
-                    .padding(.horizontal)
-                    .frame(height: 55)
-                    .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.888, opacity: 0.429))
-                    .cornerRadius(10.0)
-                Button(action: saveButtonPressed, label: {
-                    //SAVE BUTTON
-                    Text("Save".uppercased())
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .frame(height: 55)
-                        .frame(maxWidth: .infinity)
-                        .background(secondaryAccentColor)
-                        .cornerRadius(10.0)
-                })
+        
+        ZStack {
+            Color(backgroundColor)
+                .ignoresSafeArea()
+            ScrollView {
                 
+                VStack {
+                    
+                    TextField("Type something here...", text: $textFieldText)
+                        .padding(.horizontal)
+                        .frame(height: 55)
+                        .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.888, opacity: 0.429))
+                        .cornerRadius(10.0)
+                    Button(action: saveButtonPressed, label: {
+                        //SAVE BUTTON
+                        Text("Save".uppercased())
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .frame(height: 55)
+                            .frame(maxWidth: .infinity)
+                            .background(secondaryAccentColor)
+                            .cornerRadius(10.0)
+                    })   
+                }
+                .padding()
             }
-            .padding()
-        }
-        .navigationTitle("Add a Task 🖋️")
+            .navigationTitle("Add a Task 🖋️")
         .alert(isPresented: $showAlert, content: getAlert)
+        }
     }
     
     func saveButtonPressed() {
