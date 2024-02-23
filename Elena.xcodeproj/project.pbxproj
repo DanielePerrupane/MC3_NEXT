@@ -14,6 +14,7 @@
 		E70E478A2B83AE9900D09A6A /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70E47892B83AE9900D09A6A /* Task.swift */; };
 		E70E47902B83BEFB00D09A6A /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70E478F2B83BEFB00D09A6A /* ListView.swift */; };
 		E70E47922B83C05500D09A6A /* SubTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70E47912B83C05500D09A6A /* SubTaskView.swift */; };
+		E76A381D2B88B12800E02DC8 /* GrowthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76A381C2B88B12800E02DC8 /* GrowthView.swift */; };
 		E7A273062B85F0480020F273 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A273052B85F0480020F273 /* AddView.swift */; };
 		E7A273082B8602890020F273 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A273072B8602890020F273 /* ItemModel.swift */; };
 		E7A2730A2B8604500020F273 /* ListView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A273092B8604500020F273 /* ListView2.swift */; };
@@ -32,6 +33,7 @@
 		E70E47892B83AE9900D09A6A /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E70E478F2B83BEFB00D09A6A /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		E70E47912B83C05500D09A6A /* SubTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskView.swift; sourceTree = "<group>"; };
+		E76A381C2B88B12800E02DC8 /* GrowthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthView.swift; sourceTree = "<group>"; };
 		E7A273052B85F0480020F273 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E7A273072B8602890020F273 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		E7A273092B8604500020F273 /* ListView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView2.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				E7A273092B8604500020F273 /* ListView2.swift */,
 				E7A273052B85F0480020F273 /* AddView.swift */,
 				E7A2730B2B8604A30020F273 /* ListRowView.swift */,
+				E76A381C2B88B12800E02DC8 /* GrowthView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7A273062B85F0480020F273 /* AddView.swift in Sources */,
+				E76A381D2B88B12800E02DC8 /* GrowthView.swift in Sources */,
 				E70E47842B837CCB00D09A6A /* TaskViewModel.swift in Sources */,
 				E7A273102B8644990020F273 /* NoTasksView.swift in Sources */,
 				E70E478A2B83AE9900D09A6A /* Task.swift in Sources */,
@@ -355,6 +359,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Elena/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Elena;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -386,6 +392,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Elena/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Elena;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -396,7 +404,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.discoevery-channel-2.0.Elena";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

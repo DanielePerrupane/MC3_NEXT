@@ -30,42 +30,59 @@ struct ListView2: View {
      */
     
     var body: some View {
-        ZStack{
-            Color(backgroundColor)
-                .ignoresSafeArea()
-            if listViewModel.items.isEmpty {
-                NoTasksView()
-                    .transition(AnyTransition.opacity
-                        .animation(.easeIn))
-            } else {
-                    List{
-                        
-                        ForEach(listViewModel.items){ item in
-                            ListRowView(item: item)
-                            //TAP GESTURE
-                                .onTapGesture {
-                                    withAnimation(.linear){
-                                        listViewModel.updateItem(item: item)
-                                    }
-                                }
-                                
+        TabView {
+            NavigationView {
+                ZStack{
+                    Color(backgroundColor)
+                        .ignoresSafeArea()
+                    if listViewModel.items.isEmpty {
+                        NoTasksView()
+                            .transition(AnyTransition.opacity
+                                .animation(.easeIn))
+                    } else {
+                        List{
                             
+                            ForEach(listViewModel.items){ item in
+                                ListRowView(item: item)
+                                //TAP GESTURE
+                                    .onTapGesture {
+                                        withAnimation(.linear){
+                                            listViewModel.updateItem(item: item)
+                                        }
+                                    }
+                                
+                                
+                            }
+                            .onDelete(perform: listViewModel.deleteItem)
+                            .onMove(perform: listViewModel.moveItem)
+                            .listRowBackground(Color(backgroundColor))
                         }
-                        .onDelete(perform: listViewModel.deleteItem)
-                        .onMove(perform: listViewModel.moveItem)
-                        .listRowBackground(Color(backgroundColor))
+                        .listStyle(PlainListStyle())
                     }
-                    .listStyle(PlainListStyle())
+                }
+                .preferredColorScheme(.light)
+                .navigationTitle("Daily Tasks 📝")
+                .navigationBarItems(
+                    leading: EditButton().foregroundStyle(secondaryAccentColor),
+                    trailing: NavigationLink("Add", destination: AddView())
+                        .foregroundStyle(secondaryAccentColor))
             }
+            .tabItem {
+                Label("Tasks", systemImage: "list.bullet.clipboard")
+                    .padding(.top,30)
+            }
+            
+            GrowthView()
+                .tabItem {
+                    Label("Growth", systemImage: "leaf")
+                }
         }
-        .preferredColorScheme(.light)
-        .navigationTitle("Daily Tasks 📝")
-        .navigationBarItems(
-            leading: EditButton().foregroundStyle(secondaryAccentColor),
-            trailing: NavigationLink("Add", destination: AddView())
-                .foregroundStyle(secondaryAccentColor))
+        .shadow(radius: 50)
+        .onAppear() {
+            UITabBar.appearance().backgroundColor = .white
+        }
     }
-        
+    
     
     //    func deleteItem(indexSet: IndexSet) {
     //        items.remove(atOffsets: indexSet)
