@@ -10,16 +10,12 @@ import SwiftUI
 struct ListView2: View {
     
     @EnvironmentObject var listViewModel: ListViewModel
+    @State private var selectedTab = 1
     let secondaryAccentColor = Color("SecondAccentColor")
     let backgroundColor = Color("background")
     
-    //    @State var items: [ItemModel] = [
-    //
-    //        ItemModel(title: "First Title!", isCompleted: false),
-    //        ItemModel(title: "Second Title!", isCompleted: true),
-    //        ItemModel(title: "Third Title!", isCompleted: false)
-    //
-    //    ]
+    @FocusState private var isFocused: Bool
+    
     
     /*
      CRUD FUNCTION
@@ -30,7 +26,7 @@ struct ListView2: View {
      */
     
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             NavigationView {
                 ZStack{
                     Color(backgroundColor)
@@ -40,24 +36,26 @@ struct ListView2: View {
                             .transition(AnyTransition.opacity
                                 .animation(.easeIn))
                     } else {
-                        List{
-                            
-                            ForEach(listViewModel.items){ item in
-                                ListRowView(item: item)
-                                //TAP GESTURE
-                                    .onTapGesture {
-                                        withAnimation(.linear){
-                                            listViewModel.updateItem(item: item)
+                            List{
+                                ForEach(listViewModel.items){ item in
+                                    ListRowView(item: item)
+                                        
+                                    //TAP GESTURE PER CHECKBOX
+                                        .onTapGesture {
+                                            withAnimation(.linear){
+                                                listViewModel.updateItem(item: item)
+                                            }
                                         }
-                                    }
-                                
-                                
+                                }
+                                //DA MODIFICARE
+                                //swipe left delete
+                                .onDelete(perform: listViewModel.deleteItem)
+                                //press to move
+                                .onMove(perform: listViewModel.moveItem)
+                                //background color of the list
+                                .listRowBackground(Color(backgroundColor))
                             }
-                            .onDelete(perform: listViewModel.deleteItem)
-                            .onMove(perform: listViewModel.moveItem)
-                            .listRowBackground(Color(backgroundColor))
-                        }
-                        .listStyle(PlainListStyle())
+                            .listStyle(PlainListStyle())
                     }
                 }
                 .preferredColorScheme(.light)
@@ -65,24 +63,27 @@ struct ListView2: View {
                 .navigationBarItems(
                     leading: EditButton().foregroundStyle(secondaryAccentColor),
                     trailing: NavigationLink("Add", destination: AddView())
-                        .foregroundStyle(secondaryAccentColor))
+                    .foregroundStyle(secondaryAccentColor))
             }
             .tabItem {
                 Label("Tasks", systemImage: "list.bullet.clipboard")
                     .padding(.top,30)
-            }
+            }.tag(1)
             
             GrowthView()
                 .tabItem {
                     Label("Growth", systemImage: "leaf")
-                }
+                }.tag(2)
+            
+            
+            
         }
-        .shadow(radius: 50)
+        .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
         .onAppear() {
             UITabBar.appearance().backgroundColor = .white
         }
     }
-    
+        
     
     //    func deleteItem(indexSet: IndexSet) {
     //        items.remove(atOffsets: indexSet)
