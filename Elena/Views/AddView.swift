@@ -27,8 +27,10 @@ struct AddView: View {
                 
                 VStack {
                     Text("Add a Task 🖋️")
-                        .font(.title)
+                        .font(.largeTitle)
                         .fontWeight(.bold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
                         
                     TextField("Type something here...", text: $textFieldText)
                         .padding(.horizontal)
