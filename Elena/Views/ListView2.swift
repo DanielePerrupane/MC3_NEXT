@@ -14,12 +14,12 @@ struct ListView2: View {
     let secondaryAccentColor = Color("SecondAccentColor")
     let backgroundColor = Color("background")
     
+    //MODALE
     @State var showModal = false
     
     
     @FocusState private var isFocused: Bool
     @State private var navigationTitle: String = "Daily Tasks 📝"
-    
     
     /*
      CRUD FUNCTION
@@ -43,11 +43,21 @@ struct ListView2: View {
                             List{
                                 ForEach(listViewModel.items){ item in
                                     ListRowView(item: item)
-                                        .contextMenu {
-                                            RenameButton()
-                                        }
-                                        .renameAction {
-                                           isFocused = true 
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: true){
+                                            Button(action: {
+                                                //TO DO DELETE
+                                                if let index = listViewModel.items.firstIndex(of: item) {
+                                                        listViewModel.deleteItem(indexSet: IndexSet([index]))
+                                                    }
+                                            },label: {
+                                                Image(systemName: "trash")
+                                            }).tint(.red)
+                                            Button(action: {
+                                                //TO EDIT TEXT
+                                                
+                                            },label: {
+                                                Image(systemName: "square.and.pencil")
+                                            })
                                         }
                                         
                                     //TAP GESTURE PER CHECKBOX
@@ -59,7 +69,8 @@ struct ListView2: View {
                                 }
                                 //DA MODIFICARE
                                 //swipe left delete
-                                .onDelete(perform: listViewModel.deleteItem)
+                                //.onDelete(perform: listViewModel.deleteItem)
+                                
                                 //press to move
                                 .onMove(perform: listViewModel.moveItem)
                                 //background color of the list
@@ -78,10 +89,12 @@ struct ListView2: View {
 //                    isFocused = true
 //                }
                 .navigationBarItems(
-                    leading: EditButton().foregroundStyle(secondaryAccentColor),
+                    leading: EditButton().foregroundStyle(secondaryAccentColor)
+                        .fontWeight(.bold),
                     trailing: Button(action: {showModal = true}, label: {
                         Image(systemName: "plus")
                     })
+                    .fontWeight(.bold)
                     .sheet(isPresented: $showModal) {
                         AddView()
                     })
@@ -106,13 +119,13 @@ struct ListView2: View {
     }
         
     
-    //    func deleteItem(indexSet: IndexSet) {
-    //        items.remove(atOffsets: indexSet)
-    //    }
-    //
-    //    func moveItem(from: IndexSet, to: Int) {
-    //        items.move(fromOffsets: from, toOffset: to)
-    //    }
+//        func deleteItem(indexSet: IndexSet) {
+//            items.remove(atOffsets: indexSet)
+//        }
+    
+//        func moveItem(from: IndexSet, to: Int) {
+//            items.move(fromOffsets: from, toOffset: to)
+//        }
     
 }
 

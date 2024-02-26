@@ -12,9 +12,11 @@ struct ListRowView: View {
     let item: ItemModel
     var body: some View {
         HStack {
+            //Circle
             Image(systemName: item.isCompleted ? "checkmark.circle" : "circle")
                 .foregroundColor(item.isCompleted ? .green : .red)
             
+            //Testo
             Text(item.title)
             Spacer()
         }

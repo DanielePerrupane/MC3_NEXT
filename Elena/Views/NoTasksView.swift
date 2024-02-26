@@ -11,6 +11,7 @@ struct NoTasksView: View {
     
     @State var animate: Bool = false
     let secondaryAccentColor = Color("SecondAccentColor")
+    @State var showModal = false
     //let backgroundColor = Color("background")
     
     var body: some View {
@@ -24,20 +25,22 @@ struct NoTasksView: View {
                 //CONCORDARE UN TESTO
                 Text("Here you can add the tasks ")
                     .padding(.bottom, 20)
-                NavigationLink(
-                    destination: AddView(),
-                    label: {
-                        Text("Add Something 🌼")
-                        //COLORE TESTO
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .frame(height: 55)
-                            .frame(maxWidth: .infinity)
-                            
-                        //CONCORDARE COLORE BOTTONE
-                            .background(secondaryAccentColor)
-                            .cornerRadius(10)
-                    })
+                Button(action: {showModal = true},
+                       label: {
+                    Text("Add Something 🌼")
+                    //COLORE TESTO
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .frame(height: 55)
+                        .frame(maxWidth: .infinity)
+                    
+                    //CONCORDARE COLORE BOTTONE
+                        .background(secondaryAccentColor)
+                        .cornerRadius(10)
+                })
+                .sheet(isPresented: $showModal) {
+                    AddView()
+                }
                 .padding(.horizontal, animate ? 30 : 50)
                 .shadow(
                     color: secondaryAccentColor.opacity(0.7),
