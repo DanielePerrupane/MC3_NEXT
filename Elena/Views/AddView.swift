@@ -4,19 +4,24 @@
 //
 //  Created by Daniele Perrupane on 21/02/24.
 //
-
+import AlertToast
 import SwiftUI
+import Foundation
 
 struct AddView: View {
+    
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var listViewModel: ListViewModel
     @State var textFieldText: String = ""
+    
+    @State private var showToast = false
+    @State var showAlert: Bool = false
     
     let secondaryAccentColor = Color("SecondAccentColor")
     let backgroundColor = Color("background")
     
     @State var alertTitle: String = ""
-    @State var showAlert: Bool = false
+    
     
     var body: some View {
         
@@ -46,14 +51,30 @@ struct AddView: View {
                             .frame(maxWidth: .infinity)
                             .background(secondaryAccentColor)
                             .cornerRadius(10.0)
-                    })   
+//                            .toast(isPresenting:showToastBinding()) {
+//                                AlertToast(type: .regular, title: "prova")
+//                            }
+                        
+                    })
+//                    Button(action: saveButtonPressed, label: {
+//                        showToast.toggle()
+//                    })
                 }
                 .padding()
+//                .toast(isPresenting: $showToast){
+//                    AlertToast(type: .regular, title: "Toast Message")
+//                }
             }
-            
         .alert(isPresented: $showAlert, content: getAlert)
         }
     }
+    
+    func showToastBinding() -> Binding<Bool> {
+           return Binding<Bool>(
+               get: { showToast },
+               set: { _ in showToast = false }
+           )
+       }
     
     func saveButtonPressed() {
         if textIsAppropriate() {

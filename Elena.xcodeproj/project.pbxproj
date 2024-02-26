@@ -15,6 +15,8 @@
 		E70E47902B83BEFB00D09A6A /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70E478F2B83BEFB00D09A6A /* ListView.swift */; };
 		E70E47922B83C05500D09A6A /* SubTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70E47912B83C05500D09A6A /* SubTaskView.swift */; };
 		E751FA172B88E23F00E5FAB2 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E751FA162B88E23F00E5FAB2 /* TabBarView.swift */; };
+		E751FA1B2B8CA6A900E5FAB2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */; };
+		E751FA1E2B8CAF0F00E5FAB2 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = E751FA1D2B8CAF0F00E5FAB2 /* AlertToast */; };
 		E76A381D2B88B12800E02DC8 /* GrowthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76A381C2B88B12800E02DC8 /* GrowthView.swift */; };
 		E7A273062B85F0480020F273 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A273052B85F0480020F273 /* AddView.swift */; };
 		E7A273082B8602890020F273 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A273072B8602890020F273 /* ItemModel.swift */; };
@@ -35,6 +37,7 @@
 		E70E478F2B83BEFB00D09A6A /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		E70E47912B83C05500D09A6A /* SubTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskView.swift; sourceTree = "<group>"; };
 		E751FA162B88E23F00E5FAB2 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E76A381C2B88B12800E02DC8 /* GrowthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthView.swift; sourceTree = "<group>"; };
 		E7A273052B85F0480020F273 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E7A273072B8602890020F273 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E751FA1E2B8CAF0F00E5FAB2 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				E7A273122B87C7830020F273 /* LaunchScreen.storyboard */,
+				E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */,
 				E7A273112B8746030020F273 /* OldProject */,
 				E7A2730F2B8644990020F273 /* NoTasksView.swift */,
 				E7A273092B8604500020F273 /* ListView2.swift */,
@@ -153,6 +158,9 @@
 			dependencies = (
 			);
 			name = Elena;
+			packageProductDependencies = (
+				E751FA1D2B8CAF0F00E5FAB2 /* AlertToast */,
+			);
 			productName = Elena;
 			productReference = 4D3E03DA2B835C3C004E2FB4 /* Elena.app */;
 			productType = "com.apple.product-type.application";
@@ -180,8 +188,13 @@
 				en,
 				Base,
 				it,
+				ru,
+				de,
 			);
 			mainGroup = 4D3E03D12B835C3B004E2FB4;
+			packageReferences = (
+				E751FA1C2B8CAF0F00E5FAB2 /* XCRemoteSwiftPackageReference "AlertToast" */,
+			);
 			productRefGroup = 4D3E03DB2B835C3C004E2FB4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -198,6 +211,7 @@
 			files = (
 				E7A273132B87C7830020F273 /* LaunchScreen.storyboard in Resources */,
 				4D3E03E52B835C3C004E2FB4 /* Preview Assets.xcassets in Resources */,
+				E751FA1B2B8CA6A900E5FAB2 /* Localizable.xcstrings in Resources */,
 				4D3E03E22B835C3C004E2FB4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +453,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E751FA1C2B8CAF0F00E5FAB2 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E751FA1D2B8CAF0F00E5FAB2 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E751FA1C2B8CAF0F00E5FAB2 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4D3E03D22B835C3B004E2FB4 /* Project object */;
 }
