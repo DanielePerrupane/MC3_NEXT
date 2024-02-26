@@ -14,7 +14,9 @@ struct ListView2: View {
     let secondaryAccentColor = Color("SecondAccentColor")
     let backgroundColor = Color("background")
     
+    
     @FocusState private var isFocused: Bool
+    @State private var navigationTitle: String = "Daily Tasks 📝"
     
     
     /*
@@ -39,6 +41,12 @@ struct ListView2: View {
                             List{
                                 ForEach(listViewModel.items){ item in
                                     ListRowView(item: item)
+                                        .contextMenu {
+                                            RenameButton()
+                                        }
+                                        .renameAction {
+                                           isFocused = true 
+                                        }
                                         
                                     //TAP GESTURE PER CHECKBOX
                                         .onTapGesture {
@@ -59,7 +67,13 @@ struct ListView2: View {
                     }
                 }
                 .preferredColorScheme(.light)
-                .navigationTitle("Daily Tasks 📝")
+                .navigationTitle($navigationTitle)
+//                .contextMenu{
+//                    RenameButton()
+//                }
+//                .renameAction {
+//                    isFocused = true
+//                }
                 .navigationBarItems(
                     leading: EditButton().foregroundStyle(secondaryAccentColor),
                     trailing: NavigationLink("Add", destination: AddView())

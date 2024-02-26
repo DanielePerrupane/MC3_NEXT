@@ -14,6 +14,7 @@ struct ListRowView: View {
         HStack {
             Image(systemName: item.isCompleted ? "checkmark.circle" : "circle")
                 .foregroundColor(item.isCompleted ? .green : .red)
+            
             Text(item.title)
             Spacer()
         }
@@ -29,7 +30,7 @@ struct ListRowView_Preview: PreviewProvider{
     static var previews: some View{
         Group{
             ListRowView(item: item1)
-            ListRowView(item: item2)
+            //ListRowView(item: item2)
         }
         
     }
