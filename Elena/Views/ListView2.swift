@@ -14,6 +14,8 @@ struct ListView2: View {
     let secondaryAccentColor = Color("SecondAccentColor")
     let backgroundColor = Color("background")
     
+    @State var showModal = false
+    
     
     @FocusState private var isFocused: Bool
     @State private var navigationTitle: String = "Daily Tasks 📝"
@@ -66,6 +68,7 @@ struct ListView2: View {
                             .listStyle(PlainListStyle())
                     }
                 }
+                
                 .preferredColorScheme(.light)
                 .navigationTitle($navigationTitle)
 //                .contextMenu{
@@ -76,8 +79,12 @@ struct ListView2: View {
 //                }
                 .navigationBarItems(
                     leading: EditButton().foregroundStyle(secondaryAccentColor),
-                    trailing: NavigationLink("Add", destination: AddView())
-                    .foregroundStyle(secondaryAccentColor))
+                    trailing: Button(action: {showModal = true}, label: {
+                        Image(systemName: "plus")
+                    })
+                    .sheet(isPresented: $showModal) {
+                        AddView()
+                    })
             }
             .tabItem {
                 Label("Tasks", systemImage: "list.bullet.clipboard")

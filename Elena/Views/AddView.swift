@@ -26,7 +26,10 @@ struct AddView: View {
             ScrollView {
                 
                 VStack {
-                    
+                    Text("Add a Task 🖋️")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        
                     TextField("Type something here...", text: $textFieldText)
                         .padding(.horizontal)
                         .frame(height: 55)
@@ -45,7 +48,7 @@ struct AddView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Add a Task 🖋️")
+            
         .alert(isPresented: $showAlert, content: getAlert)
         }
     }
