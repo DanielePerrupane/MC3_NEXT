@@ -30,7 +30,6 @@
 		E7A2730C2B8604A30020F273 /* OldListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A2730B2B8604A30020F273 /* OldListRowView.swift */; };
 		E7A2730E2B8613AF0020F273 /* OldListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A2730D2B8613AF0020F273 /* OldListViewModel.swift */; };
 		E7A273102B8644990020F273 /* OldNoTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A2730F2B8644990020F273 /* OldNoTasksView.swift */; };
-		E7A273132B87C7830020F273 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7A273122B87C7830020F273 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +56,6 @@
 		E7A2730B2B8604A30020F273 /* OldListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldListRowView.swift; sourceTree = "<group>"; };
 		E7A2730D2B8613AF0020F273 /* OldListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldListViewModel.swift; sourceTree = "<group>"; };
 		E7A2730F2B8644990020F273 /* OldNoTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldNoTasksView.swift; sourceTree = "<group>"; };
-		E7A273122B87C7830020F273 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7A273142B88AA6D0020F273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,7 +97,6 @@
 				4D3E03E32B835C3C004E2FB4 /* Preview Content */,
 				E7A273142B88AA6D0020F273 /* Info.plist */,
 				4D3E03E12B835C3C004E2FB4 /* Assets.xcassets */,
-				E751FA4A2B8F473500E5FAB2 /* Elena.swift */,
 			);
 			path = Elena;
 			sourceTree = "<group>";
@@ -107,6 +104,7 @@
 		4D3E03E32B835C3C004E2FB4 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				E751FA4A2B8F473500E5FAB2 /* Elena.swift */,
 				4D3E03E42B835C3C004E2FB4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -136,7 +134,6 @@
 				E751FA542B8F481500E5FAB2 /* ContentView.swift */,
 				E751FA562B8F482D00E5FAB2 /* UpdateToDoView.swift */,
 				E751FA5A2B8F4B5100E5FAB2 /* NoTaskView.swift */,
-				E7A273122B87C7830020F273 /* LaunchScreen.storyboard */,
 				E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */,
 			);
 			path = Views;
@@ -251,7 +248,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7A273132B87C7830020F273 /* LaunchScreen.storyboard in Resources */,
 				4D3E03E52B835C3C004E2FB4 /* Preview Assets.xcassets in Resources */,
 				E751FA1B2B8CA6A900E5FAB2 /* Localizable.xcstrings in Resources */,
 				4D3E03E22B835C3C004E2FB4 /* Assets.xcassets in Resources */,
@@ -429,7 +425,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -462,7 +457,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

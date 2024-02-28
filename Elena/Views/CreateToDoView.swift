@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CreateToDoView: View {
     
@@ -14,28 +15,83 @@ struct CreateToDoView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var context
     
-    @State private var item = Item()
+    @Query private var categories: [Category]
+    
+    @State var item = Item()
+    @State var selectedCategory: Category?
     
     var body: some View {
         List {
-            TextField("Type something here", text: $item.title)
-            DatePicker("Choose a date", selection: $item.timeStamp)
-            //Toggle("Important?", isOn: $item.isCritical)
-            Button("Create".uppercased()){
-                
-                withAnimation{
-                    context.insert(item)
-                }
-                dismiss()
+            Section("Task Title"){
+                TextField("Title", text: $item.title)
             }
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
-            .frame(height: 55)
-            .font(.headline)
-            .background(color)
-            .cornerRadius(10.0)
+            Section("Date") {
+                DatePicker("Choose a date", selection: $item.timeStamp)
+            }
+            Section("Select A Category") {
+                
+                if categories.isEmpty {
+                    
+                    ContentUnavailableView("No Categories", systemImage: "archivebox")
+                        .foregroundColor(Color.accentColor)
+                    
+                } else {
+                    
+                    Picker("", selection: $selectedCategory) {
+                        
+                        ForEach(categories){ category in
+                            Text(category.title)
+                                .tag(category as Category?)
+                        }
+                        Text("None")
+                            .tag(nil as Category?)
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.inline)
+                    
+                }
+                
+            }
+            Section {
+                Button("Create".uppercased()){
+                    save()
+//                    withAnimation{
+//                        context.insert(item)
+//                    }
+                    dismiss()
+                }
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .frame(height: 55)
+                .font(.headline)
+                .background(color)
+                .cornerRadius(10.0)
+            }
         }
         .navigationTitle("Add a task 🖋️")
+        .toolbar{
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Dismiss"){
+                    dismiss()
+                }
+            }
+            
+            ToolbarItem(placement: .primaryAction){
+                Button("Done"){
+                    save()
+                    dismiss()
+                    
+                }
+            }
+        }
+    }
+}
+
+private extension CreateToDoView{
+    func save() {
+        context.insert(item)
+        item.category = selectedCategory
+        selectedCategory?.items?.append(item)
     }
 }
 

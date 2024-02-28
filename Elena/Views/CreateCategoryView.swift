@@ -38,7 +38,9 @@ struct CreateCategoryView: View {
                           text: $title)
                 Button("Add Category".uppercased()) {
                     withAnimation{
-                        modelContext.insert(Category(title: title))
+                        let category = Category(title: title)
+                        modelContext.insert(category)
+                        category.items = []
                     }
                     
                 }
@@ -53,17 +55,24 @@ struct CreateCategoryView: View {
             .foregroundColor(color)
             
             Section("Categories") {
-                ForEach(categories){ category in
-                    Text(category.title)
-                        .swipeActions{
-                            Button(role: .destructive){
-                                withAnimation{
-                                    modelContext.delete(category)
+                if categories.isEmpty {
+                    
+                    ContentUnavailableView("No Categories", systemImage: "archivebox")
+                        .foregroundColor(Color.accentColor)
+                    
+                } else {
+                    ForEach(categories){ category in
+                        Text(category.title)
+                            .swipeActions{
+                                Button(role: .destructive){
+                                    withAnimation{
+                                        modelContext.delete(category)
+                                    }
+                                } label : {
+                                    Label("Delete", systemImage: "trash.fill")
                                 }
-                            } label : {
-                                Label("Delete", systemImage: "trash.fill")
                             }
-                        }
+                    }
                 }
             }
                         

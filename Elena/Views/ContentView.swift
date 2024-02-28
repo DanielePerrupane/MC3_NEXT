@@ -31,108 +31,123 @@ struct ContentView: View {
         
         TabView(selection: $selectedTab) {
             NavigationView{
-                
                 ZStack {
-                    Color(backgroundColor)
-                        .ignoresSafeArea()
-                    if items.isEmpty{
-                        NoTasksView()
-                            .transition(AnyTransition.opacity
-                                .animation(.easeIn))
-                    }
-                    
-                    else {
-                        List{
-                            
-                            ForEach(items){ item in
-                                HStack {
+//                    Color(backgroundColor)
+//                        .ignoresSafeArea()
+                    //                    if items.isEmpty{
+                    //                        NoTasksView()
+                    //                            .transition(AnyTransition.opacity
+                    //                                .animation(.easeIn))
+                    //                    }
+                    //
+                    //                    else {
+                    List{
+                        ForEach(items){ item in
+                            HStack {
+                                VStack(alignment: .leading){
                                     
-                                    VStack(alignment: .leading){
-                                        
-                                        //TITOLO
-                                        Text(item.title)
-                                            .font(.title)
+                                    //TITOLO
+                                    Text(item.title)
+                                        .font(.title)
+                                        .foregroundStyle(Color.accentColor)
+                                        .bold()
+                                    //DATE FORMAT
+                                    Text("\(item.timeStamp, format: Date.FormatStyle(date: .numeric, time:.shortened))")
+                                        .font(.callout)
+                                    //CATEGORY
+                                    if let category = item.category {
+                                        Text(category.title)
+                                            .foregroundStyle(Color.accentColor)
                                             .bold()
-                                        //DATE FORMAT
-                                        Text("\(item.timeStamp, format: Date.FormatStyle(date: .numeric, time:.shortened))")
+                                            .padding(.horizontal)
+                                            .padding(.vertical, 8)
+                                            .background(Color(backgroundColor))
+                                            .cornerRadius(8)
+                                        
                                     }
-                                    Spacer()
                                     
-                                    //COMPLETE THE TASK
-                                    Button {
-                                        withAnimation{
-                                            item.isCompleted.toggle()
-                                        }
-                                    } label: {
-                                        Image(systemName: "checkmark")
-                                            .symbolVariant(.circle.fill)
-                                            .foregroundStyle(item.isCompleted ? .green : .gray)
-                                            .font(.largeTitle)
-                                    }
-                                    .buttonStyle(.plain)
                                 }
-                                .swipeActions(){
-                                    //DELETE THE TASK
-                                    Button(role: .destructive) {
-                                        withAnimation {
-                                            context.delete(item)
-                                        }
-                                    } label : {
-                                        Label("Delete", systemImage: "trash")
-                                            .symbolVariant(.fill)
+                                Spacer()
+                                
+                                //COMPLETE THE TASK
+                                Button {
+                                    withAnimation{
+                                        item.isCompleted.toggle()
                                     }
-                                    Button{
-                                        toDoToEdit = item
-                                    } label: {
-                                        Label("Edit", systemImage: "pencil")
-                                            .foregroundStyle(.orange)
-                                    }
+                                } label: {
+                                    Image(systemName: "checkmark")
+                                        .symbolVariant(.circle.fill)
+                                        .foregroundStyle(item.isCompleted ? .green : .gray)
+                                        .font(.largeTitle)
                                 }
+                                .buttonStyle(.plain)
                             }
-                            .listRowBackground(backgroundColor)
+                            .swipeActions(){
+                                //DELETE THE TASK
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        context.delete(item)
+                                    }
+                                } label : {
+                                    Label("Delete", systemImage: "trash")
+                                        .symbolVariant(.fill)
+                                }
+                                Button{
+                                    toDoToEdit = item
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                        
+                                }.tint(.accentColor)
+                            }
                         }
-                        .navigationTitle("To Do List 🌼")
-                        .sheet(isPresented: $showCreateToDo,
-                               content: {
-                            NavigationStack{
-                                CreateToDoView()
-                            }
-                            .presentationDetents([.medium])
-                        })
-                        .sheet(item: $toDoToEdit){
-                            toDoToEdit = nil
-                        } content: { item in
-                            NavigationStack{
-                                UpdateToDoView(item: item)
-                            }
-                            .presentationDetents([.medium])
-                        }
-                        .sheet(isPresented: $showCreateCategory,
-                               content: {
-                            NavigationStack {
-                                CreateCategoryView()
-                            }
-                        })
-                        //            .toolbar {
-                        //                ToolbarItem{
-                        //                    Button(action: {
-                        //                        showCreate.toggle()
-                        //                    }, label: {
-                        //                        Image(systemName: "plus")
-                        //                            .foregroundColor(color)
-                        //                            .bold()
-                        //                    })
-                        //                }
-                        //            }
-                        
+                        //.listRowBackground(backgroundColor)
                     }
+                    .navigationTitle("To Do List 🌼")
+                    .sheet(isPresented: $showCreateToDo,
+                           content: {
+                        //CREATE TASK
+                        NavigationStack{
+                            CreateToDoView()
+                        }
+                        //.presentationDetents([.medium])
+                    })
+                    .sheet(item: $toDoToEdit){
+                        toDoToEdit = nil
+                    } content: { item in
+                        //UPDATE VIEW
+                        NavigationStack{
+                            UpdateToDoView(item: item)
+                        }
+                        //.presentationDetents([.medium])
+                    }
+                    .sheet(isPresented: $showCreateCategory,
+                           content: {
+                        //CREATE CATEGORY
+                        NavigationStack {
+                            CreateCategoryView()
+                        }
+                    })
+                    //            .toolbar {
+                    //                ToolbarItem{
+                    //                    Button(action: {
+                    //                        showCreate.toggle()
+                    //                    }, label: {
+                    //                        Image(systemName: "plus")
+                    //                            .foregroundColor(color)
+                    //                            .bold()
+                    //                    })
+                    //                }
+                    //            }
+                    
+                    //CHIUSURA ELSE
+                    //                }
                 }
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button("New Category") {
                             showCreateCategory.toggle()
                         }
-                        .presentationDetents([.medium])
+                        //.presentationDetents([.medium])
                         .foregroundColor(color)
                         .bold()
                     }
@@ -143,25 +158,19 @@ struct ContentView: View {
                             Label("New ToDo", systemImage: "plus.circle.fill")
                                 .foregroundColor(color)
                                 .bold()
-//                                .font(.title2)
-//                                .padding(8)
-//                                .background(.gray.opacity(0.1),
-//                                            in: Capsule())
-//                                .padding(.leading)
+                            //                                .font(.title2)
+                            //                                .padding(8)
+                            //                                .background(.gray.opacity(0.1),
+                            //                                            in: Capsule())
+                            //                                .padding(.leading)
                             //                                .symbolVariant(.circle.fill)
                             
                         })
-                        .presentationDetents([.medium])
+                        //.presentationDetents([.medium])
                     }
                 }
-               
-                
-            
-                
-                
-                
-                
             }
+            
             .tabItem {
                 Label("Tasks", systemImage: "list.bullet.clipboard")
                     .padding(.top,30)

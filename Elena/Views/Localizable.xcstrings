@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "%@" : {
 
     },
@@ -28,10 +31,16 @@
     "Choose a Date" : {
 
     },
+    "Date" : {
+
+    },
     "Delete" : {
 
     },
     "Dismiss" : {
+
+    },
+    "Done" : {
 
     },
     "Edit" : {
@@ -61,16 +70,31 @@
     "New ToDo" : {
 
     },
+    "No Categories" : {
+
+    },
+    "None" : {
+
+    },
+    "Select A Category" : {
+
+    },
     "TabItem1" : {
 
     },
     "TabItem2" : {
 
     },
+    "Task Title" : {
+
+    },
     "Tasks" : {
 
     },
     "There are no tasks!" : {
+
+    },
+    "Title" : {
 
     },
     "To Do List 🌼" : {
@@ -80,6 +104,9 @@
 
     },
     "Type something here..." : {
+
+    },
+    "Update Task" : {
 
     }
   },

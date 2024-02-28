@@ -10,6 +10,8 @@ import SwiftUI
 
 struct NoTasksView: View {
     
+    @Environment(\.dismiss) var dismiss
+    
     @State var animate: Bool = false
     let secondaryAccentColor = Color("ElenaColor")
     @State var showModal = false
@@ -41,6 +43,7 @@ struct NoTasksView: View {
                 })
                 .sheet(isPresented: $showModal) {
                     CreateToDoView()
+                        
                 }
                 .padding(.horizontal, animate ? 30 : 50)
                 .shadow(
