@@ -1,8 +1,86 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
+    "Add a task 🖋️" : {
+
+    },
+    "Add a Task 🖋️" : {
+
+    },
+    "Add Category" : {
+
+    },
+    "Add Something 🌼" : {
+
+    },
+    "Categories" : {
+
+    },
+    "Category Title" : {
+
+    },
+    "Choose a date" : {
+
+    },
+    "Choose a Date" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Dismiss" : {
+
+    },
+    "Edit" : {
+
+    },
+    "Edit Text 🖋️" : {
+
+    },
+    "Elena" : {
+
+    },
+    "Enter title here" : {
+
+    },
+    "Growth" : {
+
+    },
+    "Here you can add the tasks " : {
+
+    },
     "Key" : {
       "extractionState" : "manual"
+    },
+    "New Category" : {
+
+    },
+    "New ToDo" : {
+
+    },
+    "TabItem1" : {
+
+    },
+    "TabItem2" : {
+
+    },
+    "Tasks" : {
+
+    },
+    "There are no tasks!" : {
+
+    },
+    "To Do List 🌼" : {
+
+    },
+    "Type something here" : {
+
+    },
+    "Type something here..." : {
+
     }
   },
   "version" : "1.0"

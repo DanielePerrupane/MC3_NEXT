@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Task: Identifiable {
+struct OldTask: Identifiable {
     
     var id: UUID = UUID()
     var title: String

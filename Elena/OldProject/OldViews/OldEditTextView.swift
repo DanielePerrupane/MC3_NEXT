@@ -8,19 +8,20 @@ import AlertToast
 import SwiftUI
 import Foundation
 
-struct AddView: View {
+struct OldEditTextView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var listViewModel: ListViewModel
+    @EnvironmentObject var listViewModel: OldListViewModel
     @State var textFieldText: String = ""
     
-    @State private var showToast = false
+    //ALERT
     @State var showAlert: Bool = false
-    
-    let secondaryAccentColor = Color("SecondAccentColor")
-    let backgroundColor = Color("background")
-    
     @State var alertTitle: String = ""
+    
+    //COLOR
+    let secondaryAccentColor = Color("SecondAccentColor")
+    let backgroundColor = Color("AddColor")
+    
     
     
     var body: some View {
@@ -31,16 +32,17 @@ struct AddView: View {
             ScrollView {
                 
                 VStack {
-                    Text("Add a Task 🖋️")
-                        .font(.largeTitle)
+                    Text("Edit Text 🖋️")
+                        .font(.title)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        
+                    
                     TextField("Type something here...", text: $textFieldText)
                         .padding(.horizontal)
                         .frame(height: 55)
-                        .background(Color(hue: 1.0, saturation: 0.0, brightness: 0.888, opacity: 0.429))
+                        .foregroundStyle(.black)
+                        .background(RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
+                        ).overlay(RoundedRectangle(cornerRadius: 10.0).stroke(Color.gray, lineWidth: 1.0))
                         .cornerRadius(10.0)
                     Button(action: saveButtonPressed, label: {
                         //SAVE BUTTON
@@ -51,30 +53,15 @@ struct AddView: View {
                             .frame(maxWidth: .infinity)
                             .background(secondaryAccentColor)
                             .cornerRadius(10.0)
-//                            .toast(isPresenting:showToastBinding()) {
-//                                AlertToast(type: .regular, title: "prova")
-//                            }
-                        
                     })
-//                    Button(action: saveButtonPressed, label: {
-//                        showToast.toggle()
-//                    })
+                    
                 }
                 .padding()
-//                .toast(isPresenting: $showToast){
-//                    AlertToast(type: .regular, title: "Toast Message")
-//                }
+                
             }
-        .alert(isPresented: $showAlert, content: getAlert)
+            .alert(isPresented: $showAlert, content: getAlert)
         }
     }
-    
-    func showToastBinding() -> Binding<Bool> {
-           return Binding<Bool>(
-               get: { showToast },
-               set: { _ in showToast = false }
-           )
-       }
     
     func saveButtonPressed() {
         if textIsAppropriate() {
@@ -99,7 +86,7 @@ struct AddView: View {
 
 #Preview {
     NavigationView {
-        AddView()
+        OldEditTextView()
     }
-    .environmentObject(ListViewModel())
+    .environmentObject(OldListViewModel())
 }

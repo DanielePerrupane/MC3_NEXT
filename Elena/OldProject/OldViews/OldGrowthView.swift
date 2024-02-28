@@ -1,16 +1,16 @@
 //
 //  GrowthView.swift
-//  ToDoListPlayground
+//  Elena
 //
-//  Created by Daniele Perrupane on 28/02/24.
+//  Created by Daniele Perrupane on 23/02/24.
 //
 
 import SwiftUI
 
-struct GrowthView: View {
+struct OldGrowthView: View {
     
-    let secondaryColor = Color("ElenaColor")
-    let backgroundColor = Color("Background")
+    let secondaryColor = Color("AccentColor")
+    let backgroundColor = Color("background")
     
     let percentage: String = "0%"
     let taskNumber: String = "00/100"
@@ -59,6 +59,8 @@ struct GrowthView: View {
     }
 }
 
+
+
 #Preview {
-    GrowthView()
+    OldGrowthView()
 }

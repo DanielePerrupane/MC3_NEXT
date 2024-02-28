@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ListRowView: View {
+struct OldListRowView: View {
     
-    let item: ItemModel
+    let item: OldItemModel
     var body: some View {
         HStack {
             //Circle
@@ -26,12 +26,12 @@ struct ListRowView: View {
 }
 
 struct ListRowView_Preview: PreviewProvider{
-    static var item1 = ItemModel(title: "First Item!", isCompleted: false)
-    static var item2 = ItemModel(title: "Second Item!", isCompleted: true)
+    static var item1 = OldItemModel(title: "First Item!", isCompleted: false)
+    static var item2 = OldItemModel(title: "Second Item!", isCompleted: true)
     
     static var previews: some View{
         Group{
-            ListRowView(item: item1)
+            OldListRowView(item: item1)
             //ListRowView(item: item2)
         }
         

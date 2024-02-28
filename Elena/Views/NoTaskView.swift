@@ -1,16 +1,17 @@
 //
-//  NoTasksView.swift
-//  Elena
+//  NoTaskView.swift
+//  ToDoListPlayground
 //
-//  Created by Daniele Perrupane on 21/02/24.
+//  Created by Daniele Perrupane on 28/02/24.
 //
+
 
 import SwiftUI
 
 struct NoTasksView: View {
     
     @State var animate: Bool = false
-    let secondaryAccentColor = Color("SecondAccentColor")
+    let secondaryAccentColor = Color("ElenaColor")
     @State var showModal = false
     //let backgroundColor = Color("background")
     
@@ -39,7 +40,7 @@ struct NoTasksView: View {
                         .cornerRadius(10)
                 })
                 .sheet(isPresented: $showModal) {
-                    AddView()
+                    CreateToDoView()
                 }
                 .padding(.horizontal, animate ? 30 : 50)
                 .shadow(
@@ -81,3 +82,4 @@ struct NoTasksView: View {
     }
     
 }
+

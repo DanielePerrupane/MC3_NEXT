@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ListViewModel: ObservableObject {
+class OldListViewModel: ObservableObject {
     
-    @Published var items: [ItemModel] = [] {
+    @Published var items: [OldItemModel] = [] {
         didSet{
             saveItems()
         }
@@ -24,12 +24,13 @@ class ListViewModel: ObservableObject {
         
         guard 
             let data = UserDefaults.standard.data(forKey: itemsKey),
-            let savedItems = try? JSONDecoder().decode([ItemModel].self, from: data)
+            let savedItems = try? JSONDecoder().decode([OldItemModel].self, from: data)
         else { return }
         
         self.items = savedItems
         
     }
+    
     
     func deleteItem(indexSet: IndexSet) {
         items.remove(atOffsets: indexSet)
@@ -41,11 +42,15 @@ class ListViewModel: ObservableObject {
     }
     
     func addItem(title: String) {
-        let newItem = ItemModel(title: title, isCompleted: false)
+        let newItem = OldItemModel(title: title, isCompleted: false)
         items.append(newItem)
     }
     
-    func updateItem(item: ItemModel){
+    func editText(title: String){
+        
+    }
+ 
+    func updateItem(item: OldItemModel){
         
         if let index = items.firstIndex(where: { $0.id == item.id}) {
             items[index] = item.updateCompletion()
@@ -58,4 +63,6 @@ class ListViewModel: ObservableObject {
             UserDefaults.standard.set(encodedData, forKey: itemsKey)
         }
     }
+    
+    
 }

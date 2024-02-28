@@ -9,10 +9,10 @@ import Foundation
 
 
 //IMMUTABLE STRUCT
-struct ItemModel: Identifiable, Codable, Equatable{
+struct OldItemModel: Identifiable, Codable, Equatable{
     
     let id: String
-    let title: String
+    var title: String
     let isCompleted: Bool
     
     init(id: String = UUID().uuidString, title: String, isCompleted: Bool) {
@@ -21,8 +21,9 @@ struct ItemModel: Identifiable, Codable, Equatable{
         self.isCompleted = isCompleted
     }
     
-    func updateCompletion() -> ItemModel {
-        return ItemModel(id: id, title: title, isCompleted: !isCompleted)
+    func updateCompletion() -> OldItemModel {
+        return OldItemModel(id: id, title: title, isCompleted: !isCompleted)
     }
-    
 }
+
+

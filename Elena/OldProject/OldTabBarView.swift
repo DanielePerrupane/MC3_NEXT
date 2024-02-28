@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct TabBarView: View {
+struct OldTabBarView: View {
     @State private var selectedTab = 2
-    @EnvironmentObject var listViewModel: ListViewModel
+    @EnvironmentObject var listViewModel: OldListViewModel
     var body: some View {
         TabView(selection: $selectedTab) {
           
-                GrowthView()
+                OldGrowthView()
             
             .tabItem {
                 Text("TabItem1")
                 Image(systemName: "1.circle.fill")
             }.tag(1)
             
-            NoTasksView()
+            OldNoTasksView()
             .tabItem {
                 Text("TabItem2")
                 Image(systemName: "2.circle.fill")
@@ -36,5 +36,5 @@ struct TabBarView: View {
 
 
 #Preview {
-    TabBarView()
+    OldTabBarView()
 }
