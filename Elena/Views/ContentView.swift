@@ -14,14 +14,29 @@ struct ContentView: View {
     
     
     @State private var selectedTab = 1
-    @Environment(\.modelContext) var context
+    
+    @Environment(\.modelContext) var modelContext
     
     @Query private var items: [Item]
     
+    @State private var searchQuery = ""
     @State private var showCreateCategory = false
-    
     @State private var showCreateToDo = false
     @State private var toDoToEdit: Item?
+    
+    var filteredItems: [Item] {
+        if searchQuery.isEmpty {
+            return items
+        }
+        let filteredItems = items.compactMap{ item in
+            let titleContainsQuery = item.title.range(of: searchQuery, options: .caseInsensitive) != nil
+            
+            let categoryTitleContainsQuery = item.category?.title.range(of: searchQuery, options: .caseInsensitive) != nil
+            
+            return (titleContainsQuery || categoryTitleContainsQuery) ? item : nil
+        }
+        return filteredItems
+    }
     
     
     let color = Color("ElenaColor")
@@ -32,8 +47,9 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             NavigationView{
                 ZStack {
-//                    Color(backgroundColor)
-//                        .ignoresSafeArea()
+                    
+                    //ANIMAZIONE NO TASK VIEW
+                    
                     //                    if items.isEmpty{
                     //                        NoTasksView()
                     //                            .transition(AnyTransition.opacity
@@ -42,7 +58,7 @@ struct ContentView: View {
                     //
                     //                    else {
                     List{
-                        ForEach(items){ item in
+                        ForEach(filteredItems){ item in
                             HStack {
                                 VStack(alignment: .leading){
                                     
@@ -86,7 +102,7 @@ struct ContentView: View {
                                 //DELETE THE TASK
                                 Button(role: .destructive) {
                                     withAnimation {
-                                        context.delete(item)
+                                        modelContext.delete(item)
                                     }
                                 } label : {
                                     Label("Delete", systemImage: "trash")
@@ -96,13 +112,20 @@ struct ContentView: View {
                                     toDoToEdit = item
                                 } label: {
                                     Label("Edit", systemImage: "pencil")
-                                        
+                                    
                                 }.tint(.accentColor)
                             }
                         }
                         //.listRowBackground(backgroundColor)
                     }
                     .navigationTitle("To Do List 🌼")
+                    .searchable(text: $searchQuery, prompt: "Search for a task or a category")
+                    //SEARCH VUOTA 
+                    .overlay {
+                        if filteredItems.isEmpty {
+                            ContentUnavailableView.search
+                        }
+                    }
                     .sheet(isPresented: $showCreateToDo,
                            content: {
                         //CREATE TASK
@@ -142,6 +165,7 @@ struct ContentView: View {
                     //CHIUSURA ELSE
                     //                }
                 }
+                .preferredColorScheme(.light)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button("New Category") {
@@ -170,6 +194,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .preferredColorScheme(.light)
             
             .tabItem {
                 Label("Tasks", systemImage: "list.bullet.clipboard")
@@ -181,10 +206,9 @@ struct ContentView: View {
                     Label("Growth", systemImage: "leaf")
                 }.tag(2)
         }
-        
-        
-        
+        .preferredColorScheme(.light)
     }
+    
 }
 
 #Preview {

@@ -128,11 +128,11 @@
 		E70E47802B837C8200D09A6A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E751FA4C2B8F476600E5FAB2 /* GrowthView.swift */,
-				E751FA502B8F47A300E5FAB2 /* CreateCategoryView.swift */,
-				E751FA522B8F47BD00E5FAB2 /* CreateToDoView.swift */,
 				E751FA542B8F481500E5FAB2 /* ContentView.swift */,
+				E751FA522B8F47BD00E5FAB2 /* CreateToDoView.swift */,
 				E751FA562B8F482D00E5FAB2 /* UpdateToDoView.swift */,
+				E751FA502B8F47A300E5FAB2 /* CreateCategoryView.swift */,
+				E751FA4C2B8F476600E5FAB2 /* GrowthView.swift */,
 				E751FA5A2B8F4B5100E5FAB2 /* NoTaskView.swift */,
 				E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */,
 			);
