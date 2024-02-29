@@ -90,6 +90,7 @@
 		4D3E03DC2B835C3C004E2FB4 /* Elena */ = {
 			isa = PBXGroup;
 			children = (
+				E751FA4A2B8F473500E5FAB2 /* Elena.swift */,
 				E7A273112B8746030020F273 /* OldProject */,
 				E70E47802B837C8200D09A6A /* Views */,
 				E70E477E2B837C7500D09A6A /* Models */,
@@ -104,7 +105,6 @@
 		4D3E03E32B835C3C004E2FB4 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				E751FA4A2B8F473500E5FAB2 /* Elena.swift */,
 				4D3E03E42B835C3C004E2FB4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
