@@ -10,14 +10,13 @@ import SwiftData
 
 @main
 struct Elena: App {
+    @AppStorage("isFirstTimeLaunch") private var isFirstTimeLaunch: Bool = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .modelContainer(for: Item.self)
-            
-            //            .navigationViewStyle(StackNavigationViewStyle())
-            
+            ContentView()    
         }
+        .modelContainer(ItemsContainer.create(shouldCreateDefaults: &isFirstTimeLaunch))
     }
 }
 

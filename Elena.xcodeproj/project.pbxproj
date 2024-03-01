@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D3E03E22B835C3C004E2FB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D3E03E12B835C3C004E2FB4 /* Assets.xcassets */; };
+		E72782872B91ED26001A6D6F /* ItemsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72782862B91ED26001A6D6F /* ItemsContainer.swift */; };
 		E751FA1B2B8CA6A900E5FAB2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */; };
 		E751FA1E2B8CAF0F00E5FAB2 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = E751FA1D2B8CAF0F00E5FAB2 /* AlertToast */; };
 		E751FA4B2B8F473500E5FAB2 /* Elena.swift in Sources */ = {isa = PBXBuildFile; fileRef = E751FA4A2B8F473500E5FAB2 /* Elena.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		4D3E03DA2B835C3C004E2FB4 /* Elena.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elena.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D3E03E12B835C3C004E2FB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E72782862B91ED26001A6D6F /* ItemsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsContainer.swift; sourceTree = "<group>"; };
 		E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E751FA4A2B8F473500E5FAB2 /* Elena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elena.swift; sourceTree = "<group>"; };
 		E751FA4C2B8F476600E5FAB2 /* GrowthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				E751FA542B8F481500E5FAB2 /* ContentView.swift */,
+				E72782862B91ED26001A6D6F /* ItemsContainer.swift */,
 				E751FA522B8F47BD00E5FAB2 /* CreateToDoView.swift */,
 				E751FA562B8F482D00E5FAB2 /* UpdateToDoView.swift */,
 				E751FA502B8F47A300E5FAB2 /* CreateCategoryView.swift */,
@@ -193,6 +196,7 @@
 				E751FA532B8F47BD00E5FAB2 /* CreateToDoView.swift in Sources */,
 				E751FA5B2B8F4B5100E5FAB2 /* NoTaskView.swift in Sources */,
 				E751FA552B8F481500E5FAB2 /* ContentView.swift in Sources */,
+				E72782872B91ED26001A6D6F /* ItemsContainer.swift in Sources */,
 				E7A08FE42B90D75200D9E9F1 /* TodoView.swift in Sources */,
 				E751FA4D2B8F476600E5FAB2 /* GrowthView.swift in Sources */,
 				E751FA4B2B8F473500E5FAB2 /* Elena.swift in Sources */,

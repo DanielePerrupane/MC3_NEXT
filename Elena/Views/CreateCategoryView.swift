@@ -21,6 +21,20 @@ class Category {
     }
 }
 
+extension Category {
+    
+    static var defaults: [Category] {
+        [
+        .init(title: "Health❤️"),
+        .init(title: "Fitness🏋️‍♂️"),
+        .init(title: "Family🏠"),
+        .init(title: "Work🧑‍💻"),
+        .init(title: "Personal💆‍♂️"),
+        ]
+    }
+    
+}
+
 struct CreateCategoryView: View {
     
     let color = Color("ElenaColor")
