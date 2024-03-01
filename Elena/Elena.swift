@@ -14,6 +14,9 @@ struct Elena: App {
         WindowGroup {
             ContentView()
                 .modelContainer(for: Item.self)
+            
+            //            .navigationViewStyle(StackNavigationViewStyle())
+            
         }
     }
 }

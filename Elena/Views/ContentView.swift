@@ -225,6 +225,7 @@ struct ContentView: View {
                     })
                 }
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             
             .preferredColorScheme(.light)
             //TAB ITEM #1

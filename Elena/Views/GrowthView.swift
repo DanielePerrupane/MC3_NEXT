@@ -56,6 +56,7 @@ struct GrowthView: View {
                 .navigationTitle("Elena")
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
