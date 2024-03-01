@@ -13,7 +13,7 @@ struct CreateToDoView: View {
     let color = Color("ElenaColor")
     
     @Environment(\.dismiss) var dismiss
-    @Environment(\.modelContext) var context
+    @Environment(\.modelContext) var modelContext
     
     @Query private var categories: [Category]
     
@@ -89,7 +89,7 @@ struct CreateToDoView: View {
 
 private extension CreateToDoView{
     func save() {
-        context.insert(item)
+        modelContext.insert(item)
         item.category = selectedCategory
         selectedCategory?.items?.append(item)
     }

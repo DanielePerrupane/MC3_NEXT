@@ -10,9 +10,6 @@
     "Add a task 🖋️" : {
 
     },
-    "Add a Task 🖋️" : {
-
-    },
     "Add Category" : {
 
     },
@@ -46,9 +43,6 @@
     "Edit" : {
 
     },
-    "Edit Text 🖋️" : {
-
-    },
     "Elena" : {
 
     },
@@ -58,17 +52,8 @@
     "Growth" : {
 
     },
-    "Here you can add the tasks " : {
-
-    },
     "Key" : {
       "extractionState" : "manual"
-    },
-    "New Category" : {
-
-    },
-    "New ToDo" : {
-
     },
     "No Categories" : {
 
@@ -82,19 +67,13 @@
     "Select A Category" : {
 
     },
-    "TabItem1" : {
-
-    },
-    "TabItem2" : {
-
-    },
     "Task Title" : {
 
     },
     "Tasks" : {
 
     },
-    "There are no tasks!" : {
+    "There are no tasks yet, \ntry adding your \nfirst task with the button below " : {
 
     },
     "Title" : {
@@ -104,9 +83,6 @@
 
     },
     "Type something here" : {
-
-    },
-    "Type something here..." : {
 
     },
     "Update Task" : {

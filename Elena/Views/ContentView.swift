@@ -8,25 +8,52 @@
 import SwiftUI
 import SwiftData
 
+//CAMBIAMENTO #4
+//opzioni menu a tendina
+enum SortOption: String, CaseIterable {
+    case title
+    case date
+    case category
+}
+
+//estensione menu a tendina con immagini
+extension SortOption {
+    
+    var systemImage: String {
+        switch self {
+        case .title:
+            "textformat.size.larger"
+        case .date:
+            "calendar"
+        case .category:
+            "folder"
+        }
+    }
+}
 
 
 struct ContentView: View {
     
-    
+    //VARIABILE PER TABVIEW
     @State private var selectedTab = 1
     
-    @Environment(\.modelContext) var modelContext
-    
+    @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-    
+
     @State private var searchQuery = ""
     @State private var showCreateCategory = false
     @State private var showCreateToDo = false
     @State private var toDoToEdit: Item?
     
+    //CAMBIAMENTO #4
+    @State private var selectedSortOption = SortOption.allCases.first!
+    
+    //Filtro per title e category
     var filteredItems: [Item] {
+        
         if searchQuery.isEmpty {
-            return items
+            return items.sort(on: selectedSortOption)
+            
         }
         let filteredItems = items.compactMap{ item in
             let titleContainsQuery = item.title.range(of: searchQuery, options: .caseInsensitive) != nil
@@ -35,11 +62,12 @@ struct ContentView: View {
             
             return (titleContainsQuery || categoryTitleContainsQuery) ? item : nil
         }
-        return filteredItems
+        return filteredItems.sort(on: selectedSortOption)
     }
     
-    
+    //AppMainColor
     let color = Color("ElenaColor")
+    //AppBackgroundColor
     let backgroundColor = Color("Background")
     
     var body: some View {
@@ -47,19 +75,11 @@ struct ContentView: View {
         TabView(selection: $selectedTab) {
             NavigationView{
                 ZStack {
-                    
-                    //ANIMAZIONE NO TASK VIEW
-                    
-                    //                    if items.isEmpty{
-                    //                        NoTasksView()
-                    //                            .transition(AnyTransition.opacity
-                    //                                .animation(.easeIn))
-                    //                    }
-                    //
-                    //                    else {
                     List{
                         ForEach(filteredItems){ item in
                             HStack {
+                                
+                                //VISUALIZZAZIONE ELEMENTI LISTA
                                 VStack(alignment: .leading){
                                     
                                     //TITOLO
@@ -79,12 +99,9 @@ struct ContentView: View {
                                             .padding(.vertical, 8)
                                             .background(Color(backgroundColor))
                                             .cornerRadius(8)
-                                        
                                     }
-                                    
                                 }
                                 Spacer()
-                                
                                 //COMPLETE THE TASK
                                 Button {
                                     withAnimation{
@@ -98,16 +115,17 @@ struct ContentView: View {
                                 }
                                 .buttonStyle(.plain)
                             }
+                            //SWIPE ACTIONS: DELETE AND EDIT
                             .swipeActions(){
-                                //DELETE THE TASK
+                                //DELETE
                                 Button(role: .destructive) {
                                     withAnimation {
                                         modelContext.delete(item)
                                     }
                                 } label : {
-                                    Label("Delete", systemImage: "trash")
-                                        .symbolVariant(.fill)
+                                    Label("Delete", systemImage: "trash.fill")
                                 }
+                                //EDIT
                                 Button{
                                     toDoToEdit = item
                                 } label: {
@@ -116,100 +134,146 @@ struct ContentView: View {
                                 }.tint(.accentColor)
                             }
                         }
-                        //.listRowBackground(backgroundColor)
                     }
                     .navigationTitle("To Do List 🌼")
+                    //SEARCH BAR
+                    .animation(.easeIn, value: filteredItems)
                     .searchable(text: $searchQuery, prompt: "Search for a task or a category")
-                    //SEARCH VUOTA 
+                    
+                    //TASKVIEW VUOTA
                     .overlay {
-                        if filteredItems.isEmpty {
+                        if items.isEmpty {
+                            NoTasksView()
+                                .transition(AnyTransition.opacity.animation(.easeIn))
+                        }
+                        //SEARCHVIEW VUOTA
+                        else if filteredItems.isEmpty{
                             ContentUnavailableView.search
                         }
                     }
-                    .sheet(isPresented: $showCreateToDo,
-                           content: {
-                        //CREATE TASK
-                        NavigationStack{
-                            CreateToDoView()
-                        }
-                        //.presentationDetents([.medium])
-                    })
+                    //MODALE UPDATE VIEW
                     .sheet(item: $toDoToEdit){
                         toDoToEdit = nil
-                    } content: { item in
-                        //UPDATE VIEW
+                    } content: { editItem in
                         NavigationStack{
-                            UpdateToDoView(item: item)
+                            UpdateToDoView(item: editItem)
+                                //.interactiveDismissDisabled()
                         }
-                        //.presentationDetents([.medium])
                     }
+                    //MODALE CREATE CATEGORY
                     .sheet(isPresented: $showCreateCategory,
                            content: {
-                        //CREATE CATEGORY
                         NavigationStack {
                             CreateCategoryView()
                         }
                     })
-                    //            .toolbar {
-                    //                ToolbarItem{
-                    //                    Button(action: {
-                    //                        showCreate.toggle()
-                    //                    }, label: {
-                    //                        Image(systemName: "plus")
-                    //                            .foregroundColor(color)
-                    //                            .bold()
-                    //                    })
-                    //                }
-                    //            }
-                    
-                    //CHIUSURA ELSE
-                    //                }
+                    //MODALE CREATE TASK
+                    .sheet(isPresented: $showCreateToDo,
+                           content: {
+                        NavigationStack{
+                            CreateToDoView()
+                        }
+                    })
                 }
                 .preferredColorScheme(.light)
                 .toolbar {
+                    //ELLIPSIS DX
+                    ToolbarItemGroup(placement: .topBarTrailing) {
+                        //MENU A TENDINA IN ALTO A DX
+                        Menu {
+                            Picker("", selection: $selectedSortOption) {
+                                ForEach(SortOption.allCases,
+                                        id: \.rawValue) { option in
+                                    Label(option.rawValue.capitalized,
+                                          systemImage: option.systemImage)
+                                    .tag(option)
+                                }
+                            }
+                            .labelsHidden()
+                            
+                        } label: {
+                            Image(systemName: "ellipsis")
+                                .symbolVariant(.circle)
+                        }
+                        
+                    }
+                    //ADD CATEGORY SX
                     ToolbarItem(placement: .topBarLeading) {
-                        Button("New Category") {
+                        Button("Add Category") {
                             showCreateCategory.toggle()
                         }
-                        //.presentationDetents([.medium])
+                        
                         .foregroundColor(color)
                         .bold()
                     }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            showCreateToDo.toggle()
-                        }, label: {
-                            Label("New ToDo", systemImage: "plus.circle.fill")
-                                .foregroundColor(color)
-                                .bold()
-                            //                                .font(.title2)
-                            //                                .padding(8)
-                            //                                .background(.gray.opacity(0.1),
-                            //                                            in: Capsule())
-                            //                                .padding(.leading)
-                            //                                .symbolVariant(.circle.fill)
-                            
-                        })
-                        //.presentationDetents([.medium])
-                    }
+                    
+                }
+                //PLUS IN THE BOTTOM OF THE SCREEN
+                .safeAreaInset(edge: .bottom,
+                               alignment: .center) {
+                    Button(action: {
+                        showCreateToDo.toggle()
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .symbolRenderingMode(.palette)
+                            .bold()
+                            .font(.largeTitle)
+                            .padding(8)
+                            .foregroundStyle(Color.white, color)
+                    })
                 }
             }
-            .preferredColorScheme(.light)
             
+            .preferredColorScheme(.light)
+            //TAB ITEM #1
             .tabItem {
                 Label("Tasks", systemImage: "list.bullet.clipboard")
                     .padding(.top,30)
             }.tag(1)
-            
+            //TAB ITEM #2
             GrowthView()
                 .tabItem {
                     Label("Growth", systemImage: "leaf")
                 }.tag(2)
         }
+        
         .preferredColorScheme(.light)
     }
     
+    private func delete(item: Item) {
+        
+        withAnimation{
+            modelContext.delete(item)
+        }
+        
+    }
 }
+//CAMBIAMENTO #4
+private extension [Item] {
+    
+    func sort(on option: SortOption) -> [Item] {
+        
+        switch option {
+        case .title:
+            self.sorted(by: { $0.title < $1.title })
+        case .date:
+            self.sorted(by: { $0.timeStamp < $1.timeStamp })
+        case .category:
+            self.sorted(by: {
+                guard let firstItemTitle = $0.category?.title,
+                      let secondItemTitle = $1.category?.title else { return false }
+                return firstItemTitle < secondItemTitle
+            })
+        }
+    
+        
+    }
+    
+}
+
+
 
 #Preview {
     ContentView()

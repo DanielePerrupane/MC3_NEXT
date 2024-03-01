@@ -9,11 +9,10 @@ import Foundation
 import SwiftData
 
 @Model
-class Item {
+final class Item {
     
     var title: String
     var timeStamp: Date
-//    var isCritical: Bool
     var isCompleted: Bool
     
     //CONTROLLARE IL COMPORTAMENTO SENZA .nullify (con .nullify dava errore)
@@ -22,14 +21,11 @@ class Item {
     
     init(title: String = "",
          timeStamp: Date = .now,
-//         isCritical: Bool = false,
          isCompleted: Bool = false) {
         self.title = title
         self.timeStamp = timeStamp
-//        self.isCritical = isCritical
         self.isCompleted = isCompleted
     }
-    
 }
 
 extension Item {

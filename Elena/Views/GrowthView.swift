@@ -13,7 +13,7 @@ struct GrowthView: View {
     let backgroundColor = Color("Background")
     
     let percentage: String = "0%"
-    let taskNumber: String = "00/100"
+    let taskNumber: String = "0/50"
     let textDisplayed1: String = "You completed.."
     let textDisplayed2: String = "Your flower is at.."
     

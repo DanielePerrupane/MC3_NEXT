@@ -22,11 +22,11 @@ struct NoTasksView: View {
             
             VStack(spacing: 10) {
                 
-                Text("There are no tasks!")
-                    .font(.title)
+                Text("There are no tasks yet, \ntry adding your \nfirst task with the button below ")
+                    //.font(.title)
                     .fontWeight(.semibold)
                 //CONCORDARE UN TESTO
-                Text("Here you can add the tasks ")
+                //Text("Here you can add the tasks ")
                     .padding(.bottom, 20)
                 Button(action: {showModal = true},
                        label: {
