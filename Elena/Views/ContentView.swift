@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SwiftData
+import Foundation
+
 
 //CAMBIAMENTO #4
 //opzioni menu a tendina
@@ -14,6 +16,7 @@ enum SortOption: String, CaseIterable {
     case title
     case date
     case category
+    case uncompleted
 }
 
 //estensione menu a tendina con immagini
@@ -27,29 +30,45 @@ extension SortOption {
             "calendar"
         case .category:
             "folder"
+        case .uncompleted:
+            "checkmark.circle.fill"
         }
     }
 }
 
-
 struct ContentView: View {
     
+    //COLORI
+    let secondaryColor = Color("ElenaColor")
+    let backgroundColor = Color("Background")
+    //VARIABILI NUMERICHE
+    @State private var percentage: Int = UserDefaults.standard.integer(forKey: "percentage_key")
+    //VARIABILE INCREMENTALE
+    @State private var count: Int = UserDefaults.standard.integer(forKey: "count_key")
+    //VARIABILI DI TESTO
+    let textDisplayed1: String = "You completed.."
+    let textDisplayed2: String = "Your flower is at.."
     //VARIABILE PER TABVIEW
     @State private var selectedTab = 1
-    
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-    
-    //VARIABILE INCREMENTALE
-    @State private var count: Int = 0
-
     @State private var searchQuery = ""
     @State private var showCreateCategory = false
     @State private var showCreateToDo = false
     @State private var toDoToEdit: Item?
-    
     //CAMBIAMENTO #4
     @State private var selectedSortOption = SortOption.allCases.first!
+    
+    
+    
+//    init() {
+//        loadCountAndPercentage()
+//        _searchQuery = State(initialValue: "")
+//        _showCreateCategory = State(initialValue: false)
+//        _showCreateToDo = State(initialValue: false)
+//        _toDoToEdit = State(initialValue: nil)
+//        _selectedSortOption = State(initialValue: SortOption.allCases.first!)
+//    }
     
     //Filtro per title e category
     var filteredItems: [Item] {
@@ -67,11 +86,8 @@ struct ContentView: View {
         }
         return filteredItems.sort(on: selectedSortOption)
     }
-    
     //AppMainColor
     let color = Color("ElenaColor")
-    //AppBackgroundColor
-    let backgroundColor = Color("Background")
     
     var body: some View {
         
@@ -81,7 +97,6 @@ struct ContentView: View {
                     List{
                         ForEach(filteredItems){ item in
                             HStack {
-                                
                                 //VISUALIZZAZIONE ELEMENTI LISTA
                                 VStack(alignment: .leading){
                                     
@@ -109,15 +124,24 @@ struct ContentView: View {
                                 Button {
                                     withAnimation{
                                         item.isCompleted.toggle()
-                                        count += 1
+                                        if item.isCompleted == true {
+                                            count += 1
+                                            percentage += 1
+                                            saveCountAndPercentage()
+                                        }
+                                        
                                     }
-                                } label: {
-                                    Image(systemName: "checkmark")
-                                        .symbolVariant(.circle.fill)
-                                        .foregroundStyle(item.isCompleted ? .green : .gray)
-                                        .font(.largeTitle)
                                 }
-                                .buttonStyle(.plain)
+                                
+                                //
+                            label: {
+                                Image(systemName: "checkmark")
+                                    .symbolVariant(.circle.fill)
+                                    .foregroundStyle(item.isCompleted ? .green : .gray)
+                                    .font(.largeTitle)
+                            }
+                                
+                            .buttonStyle(.plain)
                             }
                             //SWIPE ACTIONS: DELETE AND EDIT
                             .swipeActions(){
@@ -161,7 +185,7 @@ struct ContentView: View {
                     } content: { editItem in
                         NavigationStack{
                             UpdateToDoView(item: editItem)
-                                //.interactiveDismissDisabled()
+                            //.interactiveDismissDisabled()
                         }
                     }
                     //MODALE CREATE CATEGORY
@@ -237,15 +261,50 @@ struct ContentView: View {
                 Label("Tasks", systemImage: "list.bullet.clipboard")
                     .padding(.top,30)
             }.tag(1)
-            //TAB ITEM #2
-            GrowthView()
-                .tabItem {
-                    Label("Growth", systemImage: "leaf")
-                }.tag(2)
+            //GROWVIEW
+            NavigationView {
+                ZStack {
+                    VStack {
+                        Image("\(count)")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 180, height: 250)
+                            .clipped()
+                        Text(textDisplayed1)
+                            .font(.title)
+                            .foregroundColor(secondaryColor)
+                        
+                        //TASK COMPLETATE
+                        Text("\(count) tasks")
+                            .font(.title2)
+                            .foregroundColor(secondaryColor)
+                            .fontWeight(.bold)
+                        
+                        Text(textDisplayed2)
+                            .font(.title)
+                            .foregroundColor(secondaryColor)
+                        
+                        //PERCENTUALE TASK
+                        Text("\(percentage)%")
+                            .font(.title2)
+                            .foregroundColor(secondaryColor)
+                            .fontWeight(.bold)
+                        //                        .padding(.top,30)
+                    }
+                    .padding(.bottom, 100)
+                    .navigationTitle("Elena")
+                }
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .tabItem {
+                Label("Growth", systemImage: "leaf")
+            }.tag(2)
         }
         
         .preferredColorScheme(.light)
     }
+    
+    
     
     private func delete(item: Item) {
         
@@ -253,6 +312,21 @@ struct ContentView: View {
             modelContext.delete(item)
         }
         
+    }
+    //SAVE USER-DEFAULTS DATA
+    func saveCountAndPercentage() {
+        
+        if let encodedData = try? JSONEncoder().encode(count) {
+            UserDefaults.standard.set(count, forKey: "count_key")
+            
+        }
+        UserDefaults.standard.set(percentage, forKey: "percentage_key")
+        
+    }
+    //LOAD USER-DEFAULTS DATA
+    func loadCountAndPercentage() {
+        count = UserDefaults.standard.integer(forKey: "count_key")
+        percentage = UserDefaults.standard.integer(forKey: "percentage_key")
     }
 }
 //CAMBIAMENTO #4
@@ -271,8 +345,10 @@ private extension [Item] {
                       let secondItemTitle = $1.category?.title else { return false }
                 return firstItemTitle < secondItemTitle
             })
+        case .uncompleted:
+            self.sorted(by: { $0.isCompleted != $1.isCompleted })
         }
-    
+        
         
     }
     
