@@ -39,6 +39,9 @@ struct ContentView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    
+    //VARIABILE INCREMENTALE
+    @State private var count: Int = 0
 
     @State private var searchQuery = ""
     @State private var showCreateCategory = false
@@ -106,6 +109,7 @@ struct ContentView: View {
                                 Button {
                                     withAnimation{
                                         item.isCompleted.toggle()
+                                        count += 1
                                     }
                                 } label: {
                                     Image(systemName: "checkmark")
@@ -192,7 +196,7 @@ struct ContentView: View {
                             .labelsHidden()
                             
                         } label: {
-                            Image(systemName: "ellipsis")
+                            Image(systemName: "line.3.horizontal.decrease.circle")
                                 .symbolVariant(.circle)
                         }
                         

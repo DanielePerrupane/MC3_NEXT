@@ -12,8 +12,16 @@ struct GrowthView: View {
     let secondaryColor = Color("ElenaColor")
     let backgroundColor = Color("Background")
     
-    let percentage: String = "0%"
-    let taskNumber: String = "0/50"
+    //VARIABILI NUMERICHE
+    
+    let percentage: Double = 0.0
+    // Proprietà calcolata per ottenere la prima cifra dopo la virgola
+        var firstDecimal: Int {
+            return Int((percentage * 10).truncatingRemainder(dividingBy: 10))
+        }
+    let count: Int = 0
+    
+    //VARIABILI DI TESTO
     let textDisplayed1: String = "You completed.."
     let textDisplayed2: String = "Your flower is at.."
     
@@ -25,8 +33,6 @@ struct GrowthView: View {
         
         NavigationView {
             ZStack {
-                Color(backgroundColor)
-                    .ignoresSafeArea()
                 VStack {
                     Image("1")
                         .resizable()
@@ -37,7 +43,7 @@ struct GrowthView: View {
                         .font(.title)
                         .foregroundColor(secondaryColor)
                         
-                    Text(taskNumber)
+                    Text("\(count) tasks")
                         .font(.title2)
                         .foregroundColor(secondaryColor)
                         .fontWeight(.bold)
@@ -46,7 +52,7 @@ struct GrowthView: View {
                         .font(.title)
                         .foregroundColor(secondaryColor)
                     
-                    Text(percentage)
+                    Text("\(firstDecimal)%")
                         .font(.title2)
                         .foregroundColor(secondaryColor)
                         .fontWeight(.bold)
