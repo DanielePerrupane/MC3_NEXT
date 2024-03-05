@@ -21,6 +21,8 @@
 		E751FA572B8F482D00E5FAB2 /* UpdateToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E751FA562B8F482D00E5FAB2 /* UpdateToDoView.swift */; };
 		E751FA592B8F484A00E5FAB2 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E751FA582B8F484A00E5FAB2 /* Item.swift */; };
 		E751FA5B2B8F4B5100E5FAB2 /* NoTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E751FA5A2B8F4B5100E5FAB2 /* NoTaskView.swift */; };
+		E77F18A92B971C6F009E1842 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F18A82B971C6F009E1842 /* AlertView.swift */; };
+		E77F18AC2B97268F009E1842 /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E77F18AB2B97268F009E1842 /* AlertKit */; };
 		E7A08FE42B90D75200D9E9F1 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A08FE32B90D75200D9E9F1 /* TodoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,7 @@
 		E751FA562B8F482D00E5FAB2 /* UpdateToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateToDoView.swift; sourceTree = "<group>"; };
 		E751FA582B8F484A00E5FAB2 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E751FA5A2B8F4B5100E5FAB2 /* NoTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTaskView.swift; sourceTree = "<group>"; };
+		E77F18A82B971C6F009E1842 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		E7A08FE32B90D75200D9E9F1 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		E7A273142B88AA6D0020F273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E77F18AC2B97268F009E1842 /* AlertKit in Frameworks */,
 				E751FA1E2B8CAF0F00E5FAB2 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				E751FA542B8F481500E5FAB2 /* ContentView.swift */,
+				E77F18A82B971C6F009E1842 /* AlertView.swift */,
 				E727828A2B921001001A6D6F /* CategoriesJSONDecoder.swift */,
 				E72782882B920E09001A6D6F /* CategoryDefaults.json */,
 				E751FA522B8F47BD00E5FAB2 /* CreateToDoView.swift */,
@@ -135,6 +140,7 @@
 			name = Elena;
 			packageProductDependencies = (
 				E751FA1D2B8CAF0F00E5FAB2 /* AlertToast */,
+				E77F18AB2B97268F009E1842 /* AlertKit */,
 			);
 			productName = Elena;
 			productReference = 4D3E03DA2B835C3C004E2FB4 /* Elena.app */;
@@ -169,6 +175,7 @@
 			mainGroup = 4D3E03D12B835C3B004E2FB4;
 			packageReferences = (
 				E751FA1C2B8CAF0F00E5FAB2 /* XCRemoteSwiftPackageReference "AlertToast" */,
+				E77F18AA2B97268F009E1842 /* XCRemoteSwiftPackageReference "AlertKit" */,
 			);
 			productRefGroup = 4D3E03DB2B835C3C004E2FB4 /* Products */;
 			projectDirPath = "";
@@ -202,6 +209,7 @@
 				E727828B2B921001001A6D6F /* CategoriesJSONDecoder.swift in Sources */,
 				E751FA572B8F482D00E5FAB2 /* UpdateToDoView.swift in Sources */,
 				E751FA532B8F47BD00E5FAB2 /* CreateToDoView.swift in Sources */,
+				E77F18A92B971C6F009E1842 /* AlertView.swift in Sources */,
 				E751FA5B2B8F4B5100E5FAB2 /* NoTaskView.swift in Sources */,
 				E751FA552B8F481500E5FAB2 /* ContentView.swift in Sources */,
 				E72782872B91ED26001A6D6F /* ItemsContainer.swift in Sources */,
@@ -433,6 +441,14 @@
 				minimumVersion = 1.3.9;
 			};
 		};
+		E77F18AA2B97268F009E1842 /* XCRemoteSwiftPackageReference "AlertKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/AlertKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.8;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -440,6 +456,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E751FA1C2B8CAF0F00E5FAB2 /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
+		};
+		E77F18AB2B97268F009E1842 /* AlertKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E77F18AA2B97268F009E1842 /* XCRemoteSwiftPackageReference "AlertKit" */;
+			productName = AlertKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

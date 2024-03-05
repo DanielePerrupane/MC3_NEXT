@@ -8,6 +8,9 @@
 import SwiftUI
 import SwiftData
 import Foundation
+import AlertKit
+
+
 
 
 //CAMBIAMENTO #4
@@ -38,6 +41,8 @@ extension SortOption {
 
 struct ContentView: View {
     
+    
+    
     //COLORI
     let secondaryColor = Color("ElenaColor")
     let backgroundColor = Color("Background")
@@ -56,19 +61,10 @@ struct ContentView: View {
     @State private var showCreateCategory = false
     @State private var showCreateToDo = false
     @State private var toDoToEdit: Item?
+    //ALERT
+    @State var showAlert: Bool = false
     //CAMBIAMENTO #4
     @State private var selectedSortOption = SortOption.allCases.first!
-    
-    
-    
-//    init() {
-//        loadCountAndPercentage()
-//        _searchQuery = State(initialValue: "")
-//        _showCreateCategory = State(initialValue: false)
-//        _showCreateToDo = State(initialValue: false)
-//        _toDoToEdit = State(initialValue: nil)
-//        _selectedSortOption = State(initialValue: SortOption.allCases.first!)
-//    }
     
     //Filtro per title e category
     var filteredItems: [Item] {
@@ -123,25 +119,35 @@ struct ContentView: View {
                                 //COMPLETE THE TASK
                                 Button {
                                     withAnimation{
+                                        
                                         item.isCompleted.toggle()
-                                        if item.isCompleted == true {
+                                        
+                                        if percentage < 100  {
                                             count += 1
-                                            percentage += 1
+                                            percentage += 10
+                                            saveCountAndPercentage()
+                                        } else if percentage == 100{
+                                            showAlert = true
+                                            count = 0
+                                            percentage = 0
                                             saveCountAndPercentage()
                                         }
-                                        
                                     }
                                 }
                                 
-                                //
                             label: {
                                 Image(systemName: "checkmark")
                                     .symbolVariant(.circle.fill)
                                     .foregroundStyle(item.isCompleted ? .green : .gray)
                                     .font(.largeTitle)
                             }
-                                
                             .buttonStyle(.plain)
+                            .sheet(isPresented: $showAlert,
+                                   content: {
+                                NavigationStack{
+                                    AlertView()
+                                }
+                            })
                             }
                             //SWIPE ACTIONS: DELETE AND EDIT
                             .swipeActions(){
@@ -227,12 +233,14 @@ struct ContentView: View {
                     }
                     //ADD CATEGORY SX
                     ToolbarItem(placement: .topBarLeading) {
-                        Button("Add Category") {
+                        Button(action: {
                             showCreateCategory.toggle()
-                        }
+                        }, label: {
+                            Image(systemName: "folder.badge.plus")
+                        })
                         
                         .foregroundColor(color)
-                        .bold()
+                        //.bold()
                     }
                     
                 }
@@ -265,7 +273,7 @@ struct ContentView: View {
             NavigationView {
                 ZStack {
                     VStack {
-                        Image("\(count)")
+                        Image("\(percentage)")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 180, height: 250)
@@ -299,7 +307,9 @@ struct ContentView: View {
             .tabItem {
                 Label("Growth", systemImage: "leaf")
             }.tag(2)
+        
         }
+        
         
         .preferredColorScheme(.light)
     }

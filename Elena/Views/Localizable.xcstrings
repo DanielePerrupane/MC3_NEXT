@@ -93,6 +93,9 @@
     },
     "Update Task" : {
 
+    },
+    "You made it!" : {
+
     }
   },
   "version" : "1.0"
