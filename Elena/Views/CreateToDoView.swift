@@ -7,10 +7,11 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct CreateToDoView: View {
     
-    let color = Color("ElenaColor")
+    let color = Color("ButtonColor")
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
@@ -19,6 +20,8 @@ struct CreateToDoView: View {
     
     @State var item = Item()
     @State var selectedCategory: Category?
+    
+    @State var selectedPhoto: PhotosPickerItem?
     
     var body: some View {
         List {
@@ -52,6 +55,40 @@ struct CreateToDoView: View {
                 }
                 
             }
+            
+//            Section {
+//                
+//                
+//                if let imageData = item.image,
+//                   let uiImage = UIImage(data: imageData) {
+//                    Image(uiImage: uiImage)
+//                        .resizable()
+//                        .scaledToFill()
+//                        .frame(maxWidth: .infinity,maxHeight: 300)
+//                }
+//                
+//                PhotosPicker(selection: $selectedPhoto,
+//                             matching: .images,
+//                             photoLibrary: .shared()) {
+//                    Label("Add Image", systemImage: "photo")
+//                }
+//                
+//                if item.image != nil {
+//                    
+//                    Button(role: .destructive) {
+//                        withAnimation{
+//                            selectedPhoto = nil
+//                            item.image = nil
+//                        }
+//                        
+//                    } label : {
+//                        Label("Remove Image", systemImage: "trash")
+//                            .foregroundStyle(.red)
+//                    }
+//                    
+//                }
+//            }
+            
             Section {
                 Button("Create".uppercased()){
                     save()
@@ -71,9 +108,9 @@ struct CreateToDoView: View {
         .navigationTitle("Add a task 🖋️")
         .toolbar{
             ToolbarItem(placement: .cancellationAction) {
-                Button("Dismiss"){
+                Button("Cancel"){
                     dismiss()
-                }
+                }.bold()
             }
             
             ToolbarItem(placement: .primaryAction){
@@ -81,7 +118,13 @@ struct CreateToDoView: View {
                     save()
                     dismiss()
                     
-                }
+                }.bold()
+                
+            }
+        }
+        .task(id: selectedPhoto){
+            if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
+                item.image = data
             }
         }
     }

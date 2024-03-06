@@ -11,7 +11,6 @@
 		E72782872B91ED26001A6D6F /* ItemsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72782862B91ED26001A6D6F /* ItemsContainer.swift */; };
 		E72782892B920E09001A6D6F /* CategoryDefaults.json in Resources */ = {isa = PBXBuildFile; fileRef = E72782882B920E09001A6D6F /* CategoryDefaults.json */; };
 		E727828B2B921001001A6D6F /* CategoriesJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E727828A2B921001001A6D6F /* CategoriesJSONDecoder.swift */; };
-		E751FA1B2B8CA6A900E5FAB2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */; };
 		E751FA1E2B8CAF0F00E5FAB2 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = E751FA1D2B8CAF0F00E5FAB2 /* AlertToast */; };
 		E751FA4B2B8F473500E5FAB2 /* Elena.swift in Sources */ = {isa = PBXBuildFile; fileRef = E751FA4A2B8F473500E5FAB2 /* Elena.swift */; };
 		E751FA4D2B8F476600E5FAB2 /* GrowthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E751FA4C2B8F476600E5FAB2 /* GrowthView.swift */; };
@@ -23,6 +22,9 @@
 		E751FA5B2B8F4B5100E5FAB2 /* NoTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E751FA5A2B8F4B5100E5FAB2 /* NoTaskView.swift */; };
 		E77F18A92B971C6F009E1842 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77F18A82B971C6F009E1842 /* AlertView.swift */; };
 		E77F18AC2B97268F009E1842 /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = E77F18AB2B97268F009E1842 /* AlertKit */; };
+		E79B4A5B2B97C31900D834A7 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79B4A5A2B97C31900D834A7 /* TestView.swift */; };
+		E79B4A5E2B9872FF00D834A7 /* SwiftUIImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = E79B4A5D2B9872FF00D834A7 /* SwiftUIImageViewer */; };
+		E79B4A622B98BB8400D834A7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = E79B4A612B98BB8400D834A7 /* Localizable.xcstrings */; };
 		E7A08FE42B90D75200D9E9F1 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A08FE32B90D75200D9E9F1 /* TodoView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +34,6 @@
 		E72782862B91ED26001A6D6F /* ItemsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsContainer.swift; sourceTree = "<group>"; };
 		E72782882B920E09001A6D6F /* CategoryDefaults.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CategoryDefaults.json; sourceTree = "<group>"; };
 		E727828A2B921001001A6D6F /* CategoriesJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesJSONDecoder.swift; sourceTree = "<group>"; };
-		E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E751FA4A2B8F473500E5FAB2 /* Elena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elena.swift; sourceTree = "<group>"; };
 		E751FA4C2B8F476600E5FAB2 /* GrowthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowthView.swift; sourceTree = "<group>"; };
 		E751FA502B8F47A300E5FAB2 /* CreateCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryView.swift; sourceTree = "<group>"; };
@@ -42,6 +43,8 @@
 		E751FA582B8F484A00E5FAB2 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E751FA5A2B8F4B5100E5FAB2 /* NoTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTaskView.swift; sourceTree = "<group>"; };
 		E77F18A82B971C6F009E1842 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		E79B4A5A2B97C31900D834A7 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		E79B4A612B98BB8400D834A7 /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		E7A08FE32B90D75200D9E9F1 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		E7A273142B88AA6D0020F273 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +56,7 @@
 			files = (
 				E77F18AC2B97268F009E1842 /* AlertKit in Frameworks */,
 				E751FA1E2B8CAF0F00E5FAB2 /* AlertToast in Frameworks */,
+				E79B4A5E2B9872FF00D834A7 /* SwiftUIImageViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +82,7 @@
 		4D3E03DC2B835C3C004E2FB4 /* Elena */ = {
 			isa = PBXGroup;
 			children = (
+				E79B4A612B98BB8400D834A7 /* Localizable.xcstrings */,
 				E751FA4A2B8F473500E5FAB2 /* Elena.swift */,
 				E70E47802B837C8200D09A6A /* Views */,
 				E70E477E2B837C7500D09A6A /* Models */,
@@ -117,7 +122,7 @@
 				E751FA4C2B8F476600E5FAB2 /* GrowthView.swift */,
 				E751FA5A2B8F4B5100E5FAB2 /* NoTaskView.swift */,
 				E7A08FE32B90D75200D9E9F1 /* TodoView.swift */,
-				E751FA1A2B8CA6A900E5FAB2 /* Localizable.xcstrings */,
+				E79B4A5A2B97C31900D834A7 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			packageProductDependencies = (
 				E751FA1D2B8CAF0F00E5FAB2 /* AlertToast */,
 				E77F18AB2B97268F009E1842 /* AlertKit */,
+				E79B4A5D2B9872FF00D834A7 /* SwiftUIImageViewer */,
 			);
 			productName = Elena;
 			productReference = 4D3E03DA2B835C3C004E2FB4 /* Elena.app */;
@@ -176,6 +182,7 @@
 			packageReferences = (
 				E751FA1C2B8CAF0F00E5FAB2 /* XCRemoteSwiftPackageReference "AlertToast" */,
 				E77F18AA2B97268F009E1842 /* XCRemoteSwiftPackageReference "AlertKit" */,
+				E79B4A5C2B9872FF00D834A7 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 			);
 			productRefGroup = 4D3E03DB2B835C3C004E2FB4 /* Products */;
 			projectDirPath = "";
@@ -192,8 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E72782892B920E09001A6D6F /* CategoryDefaults.json in Resources */,
-				E751FA1B2B8CA6A900E5FAB2 /* Localizable.xcstrings in Resources */,
 				4D3E03E22B835C3C004E2FB4 /* Assets.xcassets in Resources */,
+				E79B4A622B98BB8400D834A7 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +222,7 @@
 				E72782872B91ED26001A6D6F /* ItemsContainer.swift in Sources */,
 				E7A08FE42B90D75200D9E9F1 /* TodoView.swift in Sources */,
 				E751FA4D2B8F476600E5FAB2 /* GrowthView.swift in Sources */,
+				E79B4A5B2B97C31900D834A7 /* TestView.swift in Sources */,
 				E751FA4B2B8F473500E5FAB2 /* Elena.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,6 +457,14 @@
 				minimumVersion = 5.1.8;
 			};
 		};
+		E79B4A5C2B9872FF00D834A7 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fuzzzlove/swiftui-image-viewer?ref=iosexample.com";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -461,6 +477,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E77F18AA2B97268F009E1842 /* XCRemoteSwiftPackageReference "AlertKit" */;
 			productName = AlertKit;
+		};
+		E79B4A5D2B9872FF00D834A7 /* SwiftUIImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E79B4A5C2B9872FF00D834A7 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = SwiftUIImageViewer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

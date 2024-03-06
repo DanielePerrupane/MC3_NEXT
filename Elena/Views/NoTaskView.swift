@@ -13,6 +13,7 @@ struct NoTasksView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var animate: Bool = false
+    let buttonColor = Color("ButtonColor")
     let secondaryAccentColor = Color("ElenaColor")
     @State var showModal = false
     //let backgroundColor = Color("background")
@@ -38,7 +39,7 @@ struct NoTasksView: View {
                         .frame(maxWidth: .infinity)
                     
                     //CONCORDARE COLORE BOTTONE
-                        .background(secondaryAccentColor)
+                        .background(buttonColor)
                         .cornerRadius(10)
                 })
                 .sheet(isPresented: $showModal) {
@@ -47,7 +48,7 @@ struct NoTasksView: View {
                 }
                 .padding(.horizontal, animate ? 30 : 50)
                 .shadow(
-                    color: secondaryAccentColor.opacity(0.7),
+                    color: buttonColor.opacity(0.7),
                     radius: animate ? 30 : 10,
                     x: 0,
                     y: animate ? 50 : 30)

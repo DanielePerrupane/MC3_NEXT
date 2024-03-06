@@ -17,6 +17,15 @@
         "revision" : "b39252eacd159904afd7d718bba0afabb87f2f2f",
         "version" : "1.3.9"
       }
+    },
+    {
+      "identity" : "swiftui-image-viewer?ref=iosexample.com",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fuzzzlove/swiftui-image-viewer?ref=iosexample.com",
+      "state" : {
+        "revision" : "ca77123064ae046eac2be01654ee756085c2b182",
+        "version" : "1.0.0"
+      }
     }
   ],
   "version" : 2

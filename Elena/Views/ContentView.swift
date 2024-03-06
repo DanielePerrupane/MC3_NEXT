@@ -9,9 +9,8 @@ import SwiftUI
 import SwiftData
 import Foundation
 import AlertKit
-
-
-
+import SwiftUIImageViewer
+import WebKit
 
 //CAMBIAMENTO #4
 //opzioni menu a tendina
@@ -39,13 +38,38 @@ extension SortOption {
     }
 }
 
+//struct ProgressBar: View {
+//
+//    @Binding var progress: Float
+//    var color: Color = Color.green
+//    var body: some View {
+//        ZStack {
+//            Circle()
+//                .stroke(lineWidth: 15)
+//                .opacity(0.20)
+//                .foregroundColor(Color.green)
+//
+//            Circle()
+//                .trim(from: 0.0, to: CGFloat(min(self.progress, 1.0 )))
+//                .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
+//                .foregroundColor(color)
+//                .rotationEffect(Angle(degrees: 270))
+//                .animation(.easeInOut, value:2.0)
+//        }
+//    }
+//
+//}
+
 struct ContentView: View {
     
+    @State private var showGrowView = false
     
-    
+    //PROGRESS-CIRCLE-BAR
+    //@State var progressValue: Float = 0.0
     //COLORI
     let secondaryColor = Color("ElenaColor")
-    let backgroundColor = Color("Background")
+    let backgroundColor = Color("BackgroundCategory")
+    let buttonColor = Color("ButtonColor")
     //VARIABILI NUMERICHE
     @State private var percentage: Int = UserDefaults.standard.integer(forKey: "percentage_key")
     //VARIABILE INCREMENTALE
@@ -66,6 +90,8 @@ struct ContentView: View {
     //CAMBIAMENTO #4
     @State private var selectedSortOption = SortOption.allCases.first!
     
+    //IMAGE VIEWER
+    @State private var isImageViewerPresented = false
     //Filtro per title e category
     var filteredItems: [Item] {
         
@@ -82,16 +108,139 @@ struct ContentView: View {
         }
         return filteredItems.sort(on: selectedSortOption)
     }
-    //AppMainColor
-    let color = Color("ElenaColor")
     
     var body: some View {
         
-        TabView(selection: $selectedTab) {
-            NavigationView{
-                ZStack {
-                    List{
-                        ForEach(filteredItems){ item in
+        //        TabView(selection: $selectedTab) {
+        NavigationView{
+            ZStack {
+                List{
+                    //SECTION PREVIEW
+                    Section {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                
+                                Text(textDisplayed1)
+                                //.font(.title)
+                                    .foregroundColor(secondaryColor)
+                                
+                                //TASK COMPLETATE
+                                Text("\(count) tasks")
+                                //.font(.title2)
+                                    .foregroundColor(secondaryColor)
+                                    .bold()
+                                
+                                Text(textDisplayed2)
+                                //.font(.title)
+                                    .foregroundColor(secondaryColor)
+                                
+                                //PERCENTUALE TASK
+                                Text("\(percentage)%")
+                                //.font(.title2)
+                                    .foregroundColor(secondaryColor)
+                                    .bold()
+                            }
+                            
+                        
+                            
+                            Button{
+                                showGrowView = true
+                            }
+                        label: {
+                            
+                            Image("\(percentage)")
+                                .resizable()
+                                .frame(maxWidth: 100, maxHeight: 120)
+                                .scaledToFit()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            //Image(systemName: "arrow.up.left.and.arrow.down.right")
+                        }
+                            
+                        .safeAreaInset(edge: .bottom,
+                                       alignment: .trailing) {
+                            Image(systemName: "arrow.up.left.and.arrow.down.right")
+                                .foregroundStyle(secondaryColor)
+                            
+                        }
+                        .sheet(isPresented: $showGrowView,
+                               content: {
+                            NavigationView {
+                                ZStack {
+                                    VStack {
+                                        
+                                        Image("\(percentage)")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 180, height: 250)
+                                            .clipped()
+                                        
+                                        Text(textDisplayed1)
+                                            .font(.title)
+                                            .foregroundColor(secondaryColor)
+                                        
+                                        //TASK COMPLETATE
+                                        Text("\(count) tasks")
+                                            .font(.title2)
+                                            .foregroundColor(secondaryColor)
+                                            .fontWeight(.bold)
+                                        
+                                        Text(textDisplayed2)
+                                            .font(.title)
+                                            .foregroundColor(secondaryColor)
+                                        
+                                        //PERCENTUALE TASK
+                                        Text("\(percentage)%")
+                                            .font(.title2)
+                                            .foregroundColor(secondaryColor)
+                                            .fontWeight(.bold)
+                                        
+                                        Button(action: {
+                                            percentage = 0
+                                            count = 0
+                                            
+                                            //progressValue = 0
+                                            saveCountAndPercentage()
+                                        }, label : {
+                                            //                                Circle()
+                                            //                                    .frame(width: 50, height: 50, alignment: .center)
+                                            //                                    .foregroundStyle(buttonColor)
+                                            //                                    .overlay(content: {
+                                            Image(systemName: "arrow.clockwise.circle.fill")
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                                .shadow(
+                                                    color: Color(.gray).opacity(0.7), radius: 10)
+                                                .symbolRenderingMode(.palette)
+                                                .font(.largeTitle)
+                                            //.padding()
+                                                .foregroundStyle(Color.white, buttonColor)
+                                            //                                            .font(.largeTitle)
+                                            //                                            .bold()
+                                            //.frame(width: 30, height: 25)
+                                            
+                                            //                                    })
+                                        })
+                                        //.padding()
+                                        //.foregroundColor(.white)
+                                        //.frame(maxWidth: 500)
+                                        //.frame(width: 300, height: 55)
+                                        //.font(.headline)
+                                        //.cornerRadius(10.0)
+                                    }
+                                    .padding(.bottom, 100)
+                                    .navigationTitle("Elena")
+                                }
+                            }
+                            
+                        })
+                            //                                ProgressBar(progress: self.$progressValue)
+                            //                                    .frame(width: 70, height: 70)
+                            //                                    .padding()
+                        }
+                    }
+                    
+                    ForEach(filteredItems){ item in
+                        VStack{
                             HStack {
                                 //VISUALIZZAZIONE ELEMENTI LISTA
                                 VStack(alignment: .leading){
@@ -116,22 +265,35 @@ struct ContentView: View {
                                     }
                                 }
                                 Spacer()
-                                //COMPLETE THE TASK
+                                //                                COMPLETE THE TASK
                                 Button {
-                                    withAnimation{
+                                    withAnimation {
                                         
-                                        item.isCompleted.toggle()
-                                        
-                                        if percentage < 100  {
+                                        if percentage != 0 && item.isCompleted == true{
+                                            item.isCompleted.toggle()
+                                            count -= 1
+                                            percentage -= 15
+                                            //self.progressValue -= 0.15
+                                            saveCountAndPercentage()
+                                        } else if percentage < 100 || item.isCompleted == false {
+                                            
+                                            item.isCompleted.toggle()
                                             count += 1
-                                            percentage += 10
+                                            percentage += 15
+                                            //self.progressValue += 0.15
                                             saveCountAndPercentage()
-                                        } else if percentage == 100{
-                                            showAlert = true
-                                            count = 0
-                                            percentage = 0
-                                            saveCountAndPercentage()
+                                            
                                         }
+                                        
+                                        
+                                    }
+
+                                    if percentage == 105 {
+                                        count = 0
+                                        percentage = 0
+                                        //progressValue = 0
+                                        saveCountAndPercentage()
+                                        showAlert.toggle()
                                     }
                                 }
                                 
@@ -140,178 +302,257 @@ struct ContentView: View {
                                     .symbolVariant(.circle.fill)
                                     .foregroundStyle(item.isCompleted ? .green : .gray)
                                     .font(.largeTitle)
+                                
                             }
                             .buttonStyle(.plain)
+                                //MODALE 100%
                             .sheet(isPresented: $showAlert,
                                    content: {
                                 NavigationStack{
                                     AlertView()
+                                    
                                 }
                             })
                             }
-                            //SWIPE ACTIONS: DELETE AND EDIT
-                            .swipeActions(){
-                                //DELETE
-                                Button(role: .destructive) {
-                                    withAnimation {
-                                        modelContext.delete(item)
-                                    }
-                                } label : {
-                                    Label("Delete", systemImage: "trash.fill")
-                                }
-                                //EDIT
-                                Button{
-                                    toDoToEdit = item
-                                } label: {
-                                    Label("Edit", systemImage: "pencil")
-                                    
-                                }.tint(.accentColor)
-                            }
-                        }
-                    }
-                    .navigationTitle("To Do List 🌼")
-                    //SEARCH BAR
-                    .animation(.easeIn, value: filteredItems)
-                    .searchable(text: $searchQuery, prompt: "Search for a task or a category")
-                    
-                    //TASKVIEW VUOTA
-                    .overlay {
-                        if items.isEmpty {
-                            NoTasksView()
-                                .transition(AnyTransition.opacity.animation(.easeIn))
-                        }
-                        //SEARCHVIEW VUOTA
-                        else if filteredItems.isEmpty{
-                            ContentUnavailableView.search
-                        }
-                    }
-                    //MODALE UPDATE VIEW
-                    .sheet(item: $toDoToEdit){
-                        toDoToEdit = nil
-                    } content: { editItem in
-                        NavigationStack{
-                            UpdateToDoView(item: editItem)
-                            //.interactiveDismissDisabled()
-                        }
-                    }
-                    //MODALE CREATE CATEGORY
-                    .sheet(isPresented: $showCreateCategory,
-                           content: {
-                        NavigationStack {
-                            CreateCategoryView()
-                        }
-                    })
-                    //MODALE CREATE TASK
-                    .sheet(isPresented: $showCreateToDo,
-                           content: {
-                        NavigationStack{
-                            CreateToDoView()
-                        }
-                    })
-                }
-                .preferredColorScheme(.light)
-                .toolbar {
-                    //ELLIPSIS DX
-                    ToolbarItemGroup(placement: .topBarTrailing) {
-                        //MENU A TENDINA IN ALTO A DX
-                        Menu {
-                            Picker("", selection: $selectedSortOption) {
-                                ForEach(SortOption.allCases,
-                                        id: \.rawValue) { option in
-                                    Label(option.rawValue.capitalized,
-                                          systemImage: option.systemImage)
-                                    .tag(option)
-                                }
-                            }
-                            .labelsHidden()
                             
-                        } label: {
-                            Image(systemName: "line.3.horizontal.decrease.circle")
-                                .symbolVariant(.circle)
+                            if let selectedPhotoData = item.image,
+                               let uiImage = UIImage(data: selectedPhotoData) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(maxWidth: .infinity, maxHeight: 120)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                                    .onTapGesture{
+                                        isImageViewerPresented = true
+                                    }
+                                    .fullScreenCover(isPresented: $isImageViewerPresented) {
+                                        SwiftUIImageViewer(image: Image(uiImage: uiImage))
+                                            .overlay(alignment: .topTrailing) {
+                                                Button {
+                                                    isImageViewerPresented = false
+                                                } label : {
+                                                    Image(systemName: "xmark.circle.fill")
+                                                        .font(.headline)
+                                                }
+                                                //.buttonStyle(.bordered)
+                                                //.clipShape(Circle())
+                                                .tint(buttonColor)
+                                                .padding()
+                                            }
+                                    }
+                            }
+                        }
+                        
+                        //SWIPE ACTIONS: DELETE AND EDIT
+                        .swipeActions(){
+                            //DELETE
+                            Button(role: .destructive) {
+                                withAnimation {
+                                    modelContext.delete(item)
+                                }
+                            } label : {
+                                Label("Delete", systemImage: "trash.fill")
+                            }
+                            //EDIT
+                            Button{
+                                toDoToEdit = item
+                            } label: {
+                                Label("Edit", systemImage: "pencil")
+                                
+                            }.tint(buttonColor)
+                        }
+                    }
+                }
+                .navigationTitle("To Do List 🌼")
+                //SEARCH BAR
+                .animation(.easeIn, value: filteredItems)
+                .searchable(text: $searchQuery, prompt: "Search for a task or a category")
+                
+                //TASKVIEW VUOTA
+                .overlay {
+                    if items.isEmpty {
+                        ContentUnavailableView {
+                            Image("NoTask")
+                                .resizable()
+                                .frame(width: 150, height: 150)
+                                .scaledToFit()
+                        } description: {
+                            Text("New tasks you create will appear here.")
                         }
                         
                     }
-                    //ADD CATEGORY SX
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: {
-                            showCreateCategory.toggle()
-                        }, label: {
-                            Image(systemName: "folder.badge.plus")
-                        })
+                    //SEARCHVIEW VUOTA
+                    else if filteredItems.isEmpty{
+                        ContentUnavailableView.search
+                    }
+                }
+                
+                //MODALE UPDATE VIEW
+                .sheet(item: $toDoToEdit){
+                    toDoToEdit = nil
+                } content: { editItem in
+                    NavigationStack{
+                        UpdateToDoView(item: editItem)
+                        //.interactiveDismissDisabled()
+                    }
+                }
+                //MODALE CREATE CATEGORY
+                .sheet(isPresented: $showCreateCategory,
+                       content: {
+                    NavigationStack {
+                        CreateCategoryView()
+                    }
+                })
+                //MODALE CREATE TASK
+                .sheet(isPresented: $showCreateToDo,
+                       content: {
+                    NavigationStack{
+                        CreateToDoView()
+                    }
+                })
+            }
+            //.preferredColorScheme(.light)
+            .toolbar {
+                //ELLIPSIS DX
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    //MENU A TENDINA IN ALTO A DX
+                    Menu {
+                        Picker("", selection: $selectedSortOption) {
+                            ForEach(SortOption.allCases,
+                                    id: \.rawValue) { option in
+                                Label(option.rawValue.capitalized,
+                                      systemImage: option.systemImage)
+                                .tag(option)
+                            }
+                        }
+                        .labelsHidden()
                         
-                        .foregroundColor(color)
-                        //.bold()
+                    } label: {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            .symbolVariant(.circle)
                     }
                     
                 }
-                //PLUS IN THE BOTTOM OF THE SCREEN
-                .safeAreaInset(edge: .bottom,
-                               alignment: .center) {
+                //ADD CATEGORY SX
+                ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
-                        showCreateToDo.toggle()
+                        showCreateCategory.toggle()
                     }, label: {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .symbolRenderingMode(.palette)
-                            .bold()
-                            .font(.largeTitle)
-                            .padding(8)
-                            .foregroundStyle(Color.white, color)
+                        Image(systemName: "folder.badge.plus")
                     })
+                    
+                    .foregroundColor(secondaryColor)
+                    //.bold()
                 }
+                
             }
-            .navigationViewStyle(StackNavigationViewStyle())
-            
-            .preferredColorScheme(.light)
-            //TAB ITEM #1
-            .tabItem {
-                Label("Tasks", systemImage: "list.bullet.clipboard")
-                    .padding(.top,30)
-            }.tag(1)
-            //GROWVIEW
-            NavigationView {
-                ZStack {
-                    VStack {
-                        Image("\(percentage)")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 180, height: 250)
-                            .clipped()
-                        Text(textDisplayed1)
-                            .font(.title)
-                            .foregroundColor(secondaryColor)
-                        
-                        //TASK COMPLETATE
-                        Text("\(count) tasks")
-                            .font(.title2)
-                            .foregroundColor(secondaryColor)
-                            .fontWeight(.bold)
-                        
-                        Text(textDisplayed2)
-                            .font(.title)
-                            .foregroundColor(secondaryColor)
-                        
-                        //PERCENTUALE TASK
-                        Text("\(percentage)%")
-                            .font(.title2)
-                            .foregroundColor(secondaryColor)
-                            .fontWeight(.bold)
-                        //                        .padding(.top,30)
-                    }
-                    .padding(.bottom, 100)
-                    .navigationTitle("Elena")
-                }
+            //PLUS IN THE BOTTOM OF THE SCREEN
+            .safeAreaInset(edge: .bottom,
+                           alignment: .trailing) {
+                Button(action: {
+                    showCreateToDo.toggle()
+                }, label: {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .shadow(
+                            color: Color(.gray).opacity(0.7), radius: 10)
+                        .symbolRenderingMode(.palette)
+                        .bold()
+                        .font(.largeTitle)
+                        .padding()
+                        .foregroundStyle(Color.white, buttonColor)
+                })
             }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .tabItem {
-                Label("Growth", systemImage: "leaf")
-            }.tag(2)
-        
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+        
+        //.preferredColorScheme(.light)
+        //TAB ITEM #1
+        //            .tabItem {
+        //                Label("Tasks", systemImage: "list.bullet.clipboard")
+        //                    .padding(.top,30)
+        //            }.tag(1)
+        //            //GROWTHVIEW
+        //            NavigationView {
+        //                ZStack {
+        //                    VStack {
+        //                        Image("\(percentage)")
+        //                            .resizable()
+        //                            .aspectRatio(contentMode: .fill)
+        //                            .frame(width: 180, height: 250)
+        //                            .clipped()
+        //                        Text(textDisplayed1)
+        //                            .font(.title)
+        //                            .foregroundColor(secondaryColor)
+        //
+        //                        //TASK COMPLETATE
+        //                        Text("\(count) tasks")
+        //                            .font(.title2)
+        //                            .foregroundColor(secondaryColor)
+        //                            .fontWeight(.bold)
+        //
+        //                        Text(textDisplayed2)
+        //                            .font(.title)
+        //                            .foregroundColor(secondaryColor)
+        //
+        //                        //PERCENTUALE TASK
+        //                        Text("\(percentage)%")
+        //                            .font(.title2)
+        //                            .foregroundColor(secondaryColor)
+        //                            .fontWeight(.bold)
+        //
+        //
+        //                        Button(action: {
+        //                            percentage = 0
+        //                            count = 0
+        //                            progressValue = 0
+        //                            saveCountAndPercentage()
+        //                        }, label : {
+        //                            //                                Circle()
+        //                            //                                    .frame(width: 50, height: 50, alignment: .center)
+        //                            //                                    .foregroundStyle(buttonColor)
+        //                            //                                    .overlay(content: {
+        //                            Image(systemName: "arrow.clockwise.circle.fill")
+        //                                .resizable()
+        //                                .frame(width: 50, height: 50)
+        //                                .shadow(
+        //                                    color: Color(.gray).opacity(0.7), radius: 10)
+        //                                .symbolRenderingMode(.palette)
+        //                            //.bold()
+        //                                .font(.largeTitle)
+        //                                .padding()
+        //                                .foregroundStyle(Color.white, buttonColor)
+        //                            //                                            .font(.largeTitle)
+        //                            //                                            .bold()
+        //                            //.frame(width: 30, height: 25)
+        //
+        //                            //                                    })
+        //
+        //
+        //
+        //                        })
+        //                        .foregroundColor(.white)
+        //                        //.frame(maxWidth: 500)
+        //                        //.frame(width: 300, height: 55)
+        //                        //.font(.headline)
+        //
+        //                        .cornerRadius(10.0)
+        //
+        //                    }
+        //                    .padding(.bottom, 100)
+        //                    .navigationTitle("Elena")
+        //                }
+        //            }
+        //            .navigationViewStyle(StackNavigationViewStyle())
+        //            .tabItem {
+        //                Label("Growth", systemImage: "leaf")
+        //            }.tag(2)
+        
+        //        }.tabViewStyle(DefaultTabViewStyle())
         
         
-        .preferredColorScheme(.light)
+        //.preferredColorScheme(.light)
     }
     
     

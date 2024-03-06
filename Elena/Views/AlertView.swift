@@ -11,7 +11,9 @@ struct AlertView: View{
     
     @State var showAlert: Bool = false
     var body: some View {
-        Image("LaunchScreen")
+        Image("105")
+            .resizable()
+            .frame(maxWidth: 450, maxHeight: 550)
             .scaleEffect()
         Text("You made it!")
             .bold()

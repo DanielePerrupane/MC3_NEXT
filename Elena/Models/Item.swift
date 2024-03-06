@@ -15,6 +15,9 @@ final class Item {
     var timeStamp: Date
     var isCompleted: Bool
     
+    @Attribute(.externalStorage)
+    var image: Data?
+    
     //CONTROLLARE IL COMPORTAMENTO SENZA .nullify (con .nullify dava errore)
     @Relationship(inverse: \Category.items)
     var category: Category?

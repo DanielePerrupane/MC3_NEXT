@@ -38,6 +38,7 @@ extension Category {
 struct CreateCategoryView: View {
     
     let color = Color("ElenaColor")
+    let buttonColor = Color("ButtonColor")
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -62,11 +63,11 @@ struct CreateCategoryView: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 55)
                 .font(.headline)
-                .background(color)
+                .background(buttonColor)
                 .cornerRadius(10.0)
                 .disabled(title.isEmpty)
             }
-            .foregroundColor(color)
+            
             
             Section("Categories") {
                 if categories.isEmpty {
@@ -95,12 +96,13 @@ struct CreateCategoryView: View {
         .toolbar {
             
             ToolbarItem(placement: .cancellationAction) {
-                Button("Dismiss") {
+                Button("Cancel") {
                     dismiss()
                 }
-                .foregroundColor(color)
+                //.foregroundColor(color)
                 .bold()
             }
+            
         }
     }
 }
