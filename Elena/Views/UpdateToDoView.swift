@@ -23,11 +23,13 @@ class OriginalToDo {
 
 struct UpdateToDoView: View {
     
+    
+    
     let color = Color("ElenaColor")
     let buttonColor = Color("ButtonColor")
     
     
-    
+    @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
     
     @Query private var categories: [Category]
@@ -69,63 +71,36 @@ struct UpdateToDoView: View {
                 }
                 
             }
-            
-//            Section {
-//                
-//                
-//                if let imageData = item.image,
-//                   let uiImage = UIImage(data: imageData) {
-//                    Image(uiImage: uiImage)
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(maxWidth: .infinity,maxHeight: 300)
-//                }
-//                
-//                PhotosPicker(selection: $selectedPhoto,
-//                             matching: .images,
-//                             photoLibrary: .shared()) {
-//                    Label("Add Image", systemImage: "photo")
-//                }
-//                
-//                if item.image != nil {
-//                    
-//                    Button(role: .destructive) {
-//                        withAnimation{
-//                            selectedPhoto = nil
-//                            item.image = nil
-//                        }
-//                        
-//                    } label : {
-//                        Label("Remove Image", systemImage: "trash")
-//                            .foregroundStyle(.red)
-//                    }
-//                    
-//                }
-//            }
-            
-            Section{
-                Button("Update".uppercased()){
-                    item.category = selectedCategory
-                    dismiss()
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 55)
-                .font(.headline)
-                .background(buttonColor)
-                .cornerRadius(10.0)
-            }
-            
         }
         .navigationTitle("Update Task")
+        .toolbar{
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel"){
+                    dismiss()
+                }.bold()
+            }
+            
+            ToolbarItem(placement: .primaryAction){
+                Button("Done"){
+                    save()
+                    dismiss()
+                    
+                }.bold()
+                
+            }
+        }
         .onAppear(perform: {
             selectedCategory = item.category
         })
-        .task(id: selectedPhoto){
-            if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
-                item.image = data
-            }
-        }
+        
+    }
+}
+
+private extension UpdateToDoView{
+    func save() {
+        modelContext.insert(item)
+        item.category = selectedCategory
+        selectedCategory?.items?.append(item)
     }
 }
 

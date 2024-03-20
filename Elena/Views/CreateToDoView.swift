@@ -51,58 +51,7 @@ struct CreateToDoView: View {
                     }
                     .labelsHidden()
                     .pickerStyle(.inline)
-                    
                 }
-                
-            }
-            
-//            Section {
-//                
-//                
-//                if let imageData = item.image,
-//                   let uiImage = UIImage(data: imageData) {
-//                    Image(uiImage: uiImage)
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(maxWidth: .infinity,maxHeight: 300)
-//                }
-//                
-//                PhotosPicker(selection: $selectedPhoto,
-//                             matching: .images,
-//                             photoLibrary: .shared()) {
-//                    Label("Add Image", systemImage: "photo")
-//                }
-//                
-//                if item.image != nil {
-//                    
-//                    Button(role: .destructive) {
-//                        withAnimation{
-//                            selectedPhoto = nil
-//                            item.image = nil
-//                        }
-//                        
-//                    } label : {
-//                        Label("Remove Image", systemImage: "trash")
-//                            .foregroundStyle(.red)
-//                    }
-//                    
-//                }
-//            }
-            
-            Section {
-                Button("Create".uppercased()){
-                    save()
-//                    withAnimation{
-//                        context.insert(item)
-//                    }
-                    dismiss()
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .frame(height: 55)
-                .font(.headline)
-                .background(color)
-                .cornerRadius(10.0)
             }
         }
         .navigationTitle("Add a task 🖋️")

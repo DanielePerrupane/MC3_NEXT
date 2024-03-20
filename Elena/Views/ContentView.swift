@@ -110,39 +110,31 @@ struct ContentView: View {
     }
     
     var body: some View {
-        
-        //        TabView(selection: $selectedTab) {
         NavigationView{
             ZStack {
                 List{
                     //SECTION PREVIEW
                     Section {
                         HStack {
+                            
                             VStack(alignment: .leading) {
                                 
                                 Text(textDisplayed1)
-                                //.font(.title)
                                     .foregroundColor(secondaryColor)
                                 
                                 //TASK COMPLETATE
                                 Text("\(count) tasks")
-                                //.font(.title2)
                                     .foregroundColor(secondaryColor)
                                     .bold()
                                 
                                 Text(textDisplayed2)
-                                //.font(.title)
                                     .foregroundColor(secondaryColor)
                                 
                                 //PERCENTUALE TASK
                                 Text("\(percentage)%")
-                                //.font(.title2)
                                     .foregroundColor(secondaryColor)
                                     .bold()
                             }
-                            
-                        
-                            
                             Button{
                                 showGrowView = true
                             }
@@ -160,79 +152,67 @@ struct ContentView: View {
                                        alignment: .trailing) {
                             Image(systemName: "arrow.up.left.and.arrow.down.right")
                                 .foregroundStyle(secondaryColor)
-                            
                         }
-                        .sheet(isPresented: $showGrowView,
-                               content: {
-                            NavigationView {
-                                ZStack {
-                                    VStack {
-                                        
-                                        Image("\(percentage)")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 180, height: 250)
-                                            .clipped()
-                                        
-                                        Text(textDisplayed1)
-                                            .font(.title)
-                                            .foregroundColor(secondaryColor)
-                                        
-                                        //TASK COMPLETATE
-                                        Text("\(count) tasks")
-                                            .font(.title2)
-                                            .foregroundColor(secondaryColor)
-                                            .fontWeight(.bold)
-                                        
-                                        Text(textDisplayed2)
-                                            .font(.title)
-                                            .foregroundColor(secondaryColor)
-                                        
-                                        //PERCENTUALE TASK
-                                        Text("\(percentage)%")
-                                            .font(.title2)
-                                            .foregroundColor(secondaryColor)
-                                            .fontWeight(.bold)
-                                        
-                                        Button(action: {
-                                            percentage = 0
-                                            count = 0
-                                            
-                                            //progressValue = 0
-                                            saveCountAndPercentage()
-                                        }, label : {
-                                            //                                Circle()
-                                            //                                    .frame(width: 50, height: 50, alignment: .center)
-                                            //                                    .foregroundStyle(buttonColor)
-                                            //                                    .overlay(content: {
-                                            Image(systemName: "arrow.clockwise.circle.fill")
-                                                .resizable()
-                                                .frame(width: 50, height: 50)
-                                                .shadow(
-                                                    color: Color(.gray).opacity(0.7), radius: 10)
-                                                .symbolRenderingMode(.palette)
-                                                .font(.largeTitle)
-                                            //.padding()
-                                                .foregroundStyle(Color.white, buttonColor)
-                                            //                                            .font(.largeTitle)
-                                            //                                            .bold()
-                                            //.frame(width: 30, height: 25)
-                                            
-                                            //                                    })
-                                        })
-                                        //.padding()
-                                        //.foregroundColor(.white)
-                                        //.frame(maxWidth: 500)
-                                        //.frame(width: 300, height: 55)
-                                        //.font(.headline)
-                                        //.cornerRadius(10.0)
-                                    }
-                                    .padding(.bottom, 100)
-                                    .navigationTitle("Elena")
-                                }
-                            }
-                            
-                        })
+                                       .sheet(isPresented: $showGrowView,
+                                              content: {
+                                           NavigationView {
+                                               ZStack {
+                                                   //GROWTHVIEW
+                                                   VStack {
+                                                       
+                                                       Image("\(percentage)")
+                                                           .resizable()
+                                                           .aspectRatio(contentMode: .fill)
+                                                           .frame(width: 180, height: 250)
+                                                           .clipped()
+                                                       
+                                                       Text(textDisplayed1)
+                                                           .font(.title)
+                                                           .foregroundColor(secondaryColor)
+                                                       
+                                                       //TASK COMPLETATE
+                                                       Text("\(count) tasks")
+                                                           .font(.title2)
+                                                           .foregroundColor(secondaryColor)
+                                                           .fontWeight(.bold)
+                                                       
+                                                       Text(textDisplayed2)
+                                                           .font(.title)
+                                                           .foregroundColor(secondaryColor)
+                                                       
+                                                       //PERCENTUALE TASK
+                                                       Text("\(percentage)%")
+                                                           .font(.title2)
+                                                           .foregroundColor(secondaryColor)
+                                                           .fontWeight(.bold)
+                                                       
+                                                       Button(action: {
+                                                           percentage = 0
+                                                           count = 0
+                                                           
+                                                           //progressValue = 0
+                                                           saveCountAndPercentage()
+                                                       }, label : {
+                                                           //                                Circle()
+                                                           //                                    .frame(width: 50, height: 50, alignment: .center)
+                                                           //                                    .foregroundStyle(buttonColor)
+                                                           //                                    .overlay(content: {
+                                                           Image(systemName: "arrow.clockwise.circle.fill")
+                                                               .resizable()
+                                                               .frame(width: 50, height: 50)
+                                                               .shadow(
+                                                                color: Color(.gray).opacity(0.7), radius: 10)
+                                                               .symbolRenderingMode(.palette)
+                                                               .font(.largeTitle)
+                                                               .foregroundStyle(Color.white, buttonColor)
+                                                       })
+                                                   }
+                                                   .padding(.bottom, 100)
+                                                   .navigationTitle("Elena")
+                                               }
+                                           }
+                                           
+                                       })
                             //                                ProgressBar(progress: self.$progressValue)
                             //                                    .frame(width: 70, height: 70)
                             //                                    .padding()
@@ -282,12 +262,8 @@ struct ContentView: View {
                                             percentage += 15
                                             //self.progressValue += 0.15
                                             saveCountAndPercentage()
-                                            
                                         }
-                                        
-                                        
                                     }
-
                                     if percentage == 105 {
                                         count = 0
                                         percentage = 0
@@ -296,13 +272,11 @@ struct ContentView: View {
                                         showAlert.toggle()
                                     }
                                 }
-                                
                             label: {
                                 Image(systemName: "checkmark")
                                     .symbolVariant(.circle.fill)
                                     .foregroundStyle(item.isCompleted ? .green : .gray)
                                     .font(.largeTitle)
-                                
                             }
                             .buttonStyle(.plain)
                                 //MODALE 100%
@@ -310,36 +284,8 @@ struct ContentView: View {
                                    content: {
                                 NavigationStack{
                                     AlertView()
-                                    
                                 }
                             })
-                            }
-                            
-                            if let selectedPhotoData = item.image,
-                               let uiImage = UIImage(data: selectedPhotoData) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(maxWidth: .infinity, maxHeight: 120)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                                    .onTapGesture{
-                                        isImageViewerPresented = true
-                                    }
-                                    .fullScreenCover(isPresented: $isImageViewerPresented) {
-                                        SwiftUIImageViewer(image: Image(uiImage: uiImage))
-                                            .overlay(alignment: .topTrailing) {
-                                                Button {
-                                                    isImageViewerPresented = false
-                                                } label : {
-                                                    Image(systemName: "xmark.circle.fill")
-                                                        .font(.headline)
-                                                }
-                                                //.buttonStyle(.bordered)
-                                                //.clipShape(Circle())
-                                                .tint(buttonColor)
-                                                .padding()
-                                            }
-                                    }
                             }
                         }
                         
@@ -360,6 +306,15 @@ struct ContentView: View {
                                 Label("Edit", systemImage: "pencil")
                                 
                             }.tint(buttonColor)
+                            //ARCHIVE
+//                            Button{
+//                                withAnimation {
+//                                    modelContext.move(to: NSInconsistentArchiveException)
+//                                }
+//                            } label : {
+//                                Label("Archive", systemImage: "archivebox")
+//                            }
+                            
                         }
                     }
                 }
@@ -455,8 +410,6 @@ struct ContentView: View {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
                         .frame(width: 50, height: 50)
-                        .shadow(
-                            color: Color(.gray).opacity(0.7), radius: 10)
                         .symbolRenderingMode(.palette)
                         .bold()
                         .font(.largeTitle)
@@ -466,96 +419,7 @@ struct ContentView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        
-        //.preferredColorScheme(.light)
-        //TAB ITEM #1
-        //            .tabItem {
-        //                Label("Tasks", systemImage: "list.bullet.clipboard")
-        //                    .padding(.top,30)
-        //            }.tag(1)
-        //            //GROWTHVIEW
-        //            NavigationView {
-        //                ZStack {
-        //                    VStack {
-        //                        Image("\(percentage)")
-        //                            .resizable()
-        //                            .aspectRatio(contentMode: .fill)
-        //                            .frame(width: 180, height: 250)
-        //                            .clipped()
-        //                        Text(textDisplayed1)
-        //                            .font(.title)
-        //                            .foregroundColor(secondaryColor)
-        //
-        //                        //TASK COMPLETATE
-        //                        Text("\(count) tasks")
-        //                            .font(.title2)
-        //                            .foregroundColor(secondaryColor)
-        //                            .fontWeight(.bold)
-        //
-        //                        Text(textDisplayed2)
-        //                            .font(.title)
-        //                            .foregroundColor(secondaryColor)
-        //
-        //                        //PERCENTUALE TASK
-        //                        Text("\(percentage)%")
-        //                            .font(.title2)
-        //                            .foregroundColor(secondaryColor)
-        //                            .fontWeight(.bold)
-        //
-        //
-        //                        Button(action: {
-        //                            percentage = 0
-        //                            count = 0
-        //                            progressValue = 0
-        //                            saveCountAndPercentage()
-        //                        }, label : {
-        //                            //                                Circle()
-        //                            //                                    .frame(width: 50, height: 50, alignment: .center)
-        //                            //                                    .foregroundStyle(buttonColor)
-        //                            //                                    .overlay(content: {
-        //                            Image(systemName: "arrow.clockwise.circle.fill")
-        //                                .resizable()
-        //                                .frame(width: 50, height: 50)
-        //                                .shadow(
-        //                                    color: Color(.gray).opacity(0.7), radius: 10)
-        //                                .symbolRenderingMode(.palette)
-        //                            //.bold()
-        //                                .font(.largeTitle)
-        //                                .padding()
-        //                                .foregroundStyle(Color.white, buttonColor)
-        //                            //                                            .font(.largeTitle)
-        //                            //                                            .bold()
-        //                            //.frame(width: 30, height: 25)
-        //
-        //                            //                                    })
-        //
-        //
-        //
-        //                        })
-        //                        .foregroundColor(.white)
-        //                        //.frame(maxWidth: 500)
-        //                        //.frame(width: 300, height: 55)
-        //                        //.font(.headline)
-        //
-        //                        .cornerRadius(10.0)
-        //
-        //                    }
-        //                    .padding(.bottom, 100)
-        //                    .navigationTitle("Elena")
-        //                }
-        //            }
-        //            .navigationViewStyle(StackNavigationViewStyle())
-        //            .tabItem {
-        //                Label("Growth", systemImage: "leaf")
-        //            }.tag(2)
-        
-        //        }.tabViewStyle(DefaultTabViewStyle())
-        
-        
-        //.preferredColorScheme(.light)
     }
-    
-    
     
     private func delete(item: Item) {
         
